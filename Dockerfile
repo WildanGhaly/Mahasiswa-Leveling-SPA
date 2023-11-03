@@ -1,11 +1,12 @@
 FROM node:16.17.0
 
-COPY . /app
+COPY package.json /app
 WORKDIR /app
 
 RUN npm install
-RUN npm run build
+
+COPY . /app
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]
