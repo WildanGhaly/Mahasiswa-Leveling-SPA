@@ -8,6 +8,17 @@ const LoginPage = () => {
 
     const handleLogin = () => {
         login(); // Set the isLoggedIn state to true using the login function
+        fetch('/set-cookie', {
+            method: 'GET',
+            credentials: 'include' // Penting untuk mengizinkan pengiriman cookie dengan request
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Error fetching data: ', error);
+        });
         nav('/dashboard');
     };
     
