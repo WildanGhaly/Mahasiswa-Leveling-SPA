@@ -1,10 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from './../context/AuthContext';
 import './../styles/AuthBox.css';
 
 const RegisterPage = () => {
     const nav = useNavigate();
+    const { login } = useAuth();
 
     const handleRegister = () => {
+        login();
         nav('/dashboard');
     };
     
