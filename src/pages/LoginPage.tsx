@@ -1,10 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from './../context/AuthContext'; // Import the useAuth hook
 import './../styles/AuthBox.css';
 
 const LoginPage = () => {
     const nav = useNavigate();
+    const { login } = useAuth(); // Destructure the login function from the auth context
 
     const handleLogin = () => {
+        login(); // Set the isLoggedIn state to true using the login function
         nav('/dashboard');
     };
     
