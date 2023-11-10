@@ -1,11 +1,19 @@
 // src/components/Navbar.tsx
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './../context/AuthContext';
 import './../styles/Navbar.css';
 
 const Navbar = () => {
   const { isLoggedIn, logout } = useAuth();
+  const nav = useNavigate();
+
+  // handle logout
+  const handleLogout = (e: React.FormEvent) => {
+    e.preventDefault();
+    logout();
+    nav('/');
+  }
 
   return (
     <nav className='navbar-container'>
@@ -17,7 +25,7 @@ const Navbar = () => {
       </div>
       <div className='navbar-right'>
         {isLoggedIn ? (
-          <button className='navbar-signout' onClick={logout}>Sign Out</button>
+          <button className='navbar-signout' onClick={handleLogout}>Sign Out</button>
         ) : (
         <Link className='navbar-signin' to="/login">Sign In</Link>
         )}

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './../context/AuthContext';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import './../styles/AuthBox.css';
 
 const LoginPage = () => {
@@ -15,12 +14,16 @@ const LoginPage = () => {
 
     const handleApiLogin = async (username: string, password: string) => {
         try {
+            console.log('Logging in...');
             const response = await axios.post('http://localhost:8080/login', {
                 username,
                 password
-            });
-            const { accessToken } = response.data;
-            Cookies.set('accessToken', accessToken, { expires: 1 / 24 / 60 * 5 }); // 5 minutes expiry
+            }, { withCredentials: true });
+  
+            if (response.status !== 200) {
+                throw new Error('Login failed');
+            }
+
             login();
 
             console.log('Logged in!', response.data);
