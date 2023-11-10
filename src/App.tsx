@@ -12,8 +12,9 @@ function App() {
   return (
     <AuthProvider>
     <BrowserRouter>
+    <div className="container">
       <Navbar />
-      <div className="container">
+      <div className="content">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
@@ -22,6 +23,7 @@ function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
         </Routes>
       </div>
+    </div>
     </BrowserRouter>
     </AuthProvider>
   );
