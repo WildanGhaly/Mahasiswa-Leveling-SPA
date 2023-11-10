@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import axios from 'axios';
 
 interface AuthContextType {
     isLoggedIn: boolean;
@@ -24,8 +25,39 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const login = () => setIsLoggedIn(true);
-    const logout = () => setIsLoggedIn(false);
+    useEffect(() => {
+        // Cek apakah user sudah login dengan mengirim request ke backend
+        const checkLoginStatus = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/check-status', { withCredentials: true });
+                console.log('Login status', response);
+                setIsLoggedIn(response.data.isLoggedIn);
+            } catch (error) {
+                console.error('Error when checking login status', error);
+            }
+        };
+
+        checkLoginStatus();
+    }, []);
+
+    const login = async () => {
+        try {
+            setIsLoggedIn(true);
+        } catch (error) {
+            console.error('Login failed', error);
+        }
+    };
+
+    const logout = async () => {
+        try {
+            const response = await axios.delete('http://localhost:8080/logout');
+            if (response.status === 200) {
+                setIsLoggedIn(false);
+            }
+        } catch (error) {
+            console.error('Logout failed', error);
+        }
+    };
 
     return (
         <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
