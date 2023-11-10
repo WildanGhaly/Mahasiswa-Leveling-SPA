@@ -52,7 +52,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         try {
             console.log('Logging out...');
             const response = await axios.delete('http://localhost:8080/logout', { withCredentials: true });
-            if (response.status === 200) {
+            if (response.status === 204) {
                 setIsLoggedIn(false);
             }
         } catch (error) {
