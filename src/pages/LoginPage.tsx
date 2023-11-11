@@ -39,7 +39,7 @@ const LoginPage = () => {
                 throw new Error('Login failed');
             }
 
-            login();
+            login(response.data.username);
 
             console.log('Logged in!', response.data);
             nav('/dashboard');
