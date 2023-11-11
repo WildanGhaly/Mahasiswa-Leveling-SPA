@@ -2,17 +2,17 @@
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import {
-  Box,
   Container,
   Heading,
   Input,
   Flex,
   Spacer,
-  IconButton,
   Badge,
   SimpleGrid,
+  Select,
+  Icon,
 } from '@chakra-ui/react';
-import { AddIcon } from '@chakra-ui/icons';
+import { SearchIcon } from '@chakra-ui/icons';
 import ProductCard from '../components/ProductCard'; // Create this component separately
 
 const DashboardPage = () => {
@@ -28,12 +28,6 @@ const DashboardPage = () => {
       <Flex align="center" justify="space-between" py={4}>
         <Heading>Dashboard</Heading>
         <Flex align="center">
-          <Input placeholder="Search products" mr={4} />
-          <IconButton
-            aria-label="Filter"
-            icon={<AddIcon />}
-            variant="ghost"
-          />
           <Spacer />
           <Badge colorScheme="green" mr={2}>
             My Points: 500
@@ -43,11 +37,16 @@ const DashboardPage = () => {
           </Badge>
         </Flex>
       </Flex>
-      {/* Sliding Content Here */}
-      <Box h="200px" bg="gray.200" mb={4}>
-        {/* Sliding content goes here */}
-        {/* You can use a library like react-slick for sliding content */}
-      </Box>
+      <Flex align="center" justify="space-between" py={4}>
+        <Flex mr={4} align="center" w="70%">
+          <Icon as={SearchIcon} mr={2} />
+          <Input placeholder="Search products" />
+        </Flex>
+        <Select placeholder="Select filter" w="20%">
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+        </Select>
+      </Flex>
       {/* Product Listings */}
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={4}>
         {/* Product Card Component */}
