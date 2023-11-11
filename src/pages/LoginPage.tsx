@@ -2,7 +2,22 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './../context/AuthContext';
 import axios from 'axios';
-import './../styles/AuthBox.css';
+import {
+  Box,
+  Input,
+  Button,
+  FormControl,
+  FormLabel,
+  InputGroup,
+  InputLeftElement,
+  Text,
+  VStack,
+  chakra,
+  Flex,
+} from '@chakra-ui/react';
+import { AtSignIcon, LockIcon } from '@chakra-ui/icons';
+
+const ChakraLink = chakra(Link);
 
 const LoginPage = () => {
     const nav = useNavigate();
@@ -39,40 +54,57 @@ const LoginPage = () => {
     };
 
     return (
-        <div className='auth-container'>
-            <h1>Login</h1>
-            <form className='auth-box' onSubmit={handleLogin}>
-                <div className='input-box-label'>
-                    <label htmlFor="username">Username:</label>
-                    <input 
-                        type="text" 
-                        id="username" 
-                        name="username" 
-                        required 
-                        value={username} 
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                </div>
-                <div className='input-box-label'>
-                    <label htmlFor="password">Password:</label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        required 
-                        value={password} 
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                {error && <div className="error">{error}</div>}
-                <div className='input-box-submit'>
-                    <button type="submit">Login</button>
-                    <div>Don't have an account?</div>
-                    <Link to="/register">Register</Link>
-                </div>
-            </form>
-        </div>
+        <Flex align='center' justify='center' h='80vh' w='100%'>
+            <Box bg='black' p={1} boxShadow='md' borderRadius='md' w='full' maxW='md'>
+            <Box className='auth-box' bg='white' p={6} boxShadow='md' borderRadius='md'>
+                <VStack spacing={4} align='stretch'>
+                    <Text fontSize='2xl' fontWeight='bold'>LOGIN</Text>
+                    <form onSubmit={handleLogin}>
+
+                        <FormControl id='username' isRequired>
+                            <FormLabel>Username:</FormLabel>
+                            <InputGroup>
+                                <InputLeftElement pointerEvents='none' children={<AtSignIcon color='black' />} />
+                                <Input 
+                                    type='text'
+                                    value={username} 
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    borderColor='black'
+                                />
+                            </InputGroup>
+                        </FormControl>
+
+                        <FormControl id='password' isRequired>
+                            <FormLabel>Password:</FormLabel>
+                            <InputGroup>
+                                <InputLeftElement pointerEvents='none' children={<LockIcon color='black' />} />
+                                <Input 
+                                    type='password'
+                                    value={password} 
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    borderColor='black'
+                                />
+                            </InputGroup>
+                        </FormControl>
+
+                        {error && <Text color='red.500'>{error}</Text>}
+
+                        <Button type='submit' colorScheme='blue' width='full' mt={4}>
+                            Login
+                        </Button>
+                    </form>
+                    <Text mt={2}>
+                        Don't have an account?{' '}
+                        <ChakraLink color='teal.500' to="/register">
+                            Register
+                        </ChakraLink>
+                    </Text>
+                </VStack>
+            </Box>
+            </Box>
+        </Flex>
     );
 };
+
 
 export default LoginPage;
