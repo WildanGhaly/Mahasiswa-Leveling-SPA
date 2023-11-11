@@ -31,7 +31,7 @@ const RegisterPage = () => {
                 throw new Error('Register failed');
             }
 
-            login();
+            login(response.data.username);
 
             console.log('Registered!', response.data);
             nav('/dashboard');
