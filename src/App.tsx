@@ -5,6 +5,11 @@ import AboutPage from './pages/AboutPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
+import HistoryPage from './pages/HistoryPage';
+import TopUpPage from './pages/TopUpPage';
+import MerchantPage from './pages/MerchantPage';
+import SettingsPage from './pages/SettingsPage';
+
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ChakraProvider } from '@chakra-ui/react';
 import './App.css';
@@ -35,6 +40,10 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/history" element={<HistoryPage />} />
+                <Route path="/topup" element={<TopUpPage />} />
+                <Route path="/merchant" element={<MerchantPage />} />
+                <Route path="/settings" element={<SettingsPage />} />
               </Routes>
             </div>
           </AppContainer>
