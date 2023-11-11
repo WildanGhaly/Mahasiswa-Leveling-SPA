@@ -1,8 +1,14 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './../context/AuthContext';
-import './../styles/AuthBox.css';
 import axios from 'axios';
-import { useState } from 'react';
+import {
+    Box, Input, Button, FormControl, FormLabel, InputGroup, InputLeftElement,
+    Text, VStack, chakra, Flex
+} from '@chakra-ui/react';
+import { AtSignIcon, EmailIcon, LockIcon } from '@chakra-ui/icons';
+
+const ChakraLink = chakra(Link);
 
 const RegisterPage = () => {
     const nav = useNavigate();
@@ -41,49 +47,68 @@ const RegisterPage = () => {
     };
     
     return (
-        <div className='auth-container'>
-            <h1>Register</h1>
-            <form className='auth-box' onSubmit={handleRegister}>
-                <div className='input-box-label'>
-                    <label htmlFor="username">Username</label>
-                    <input 
-                        type="text" 
-                        id="username" 
-                        name="username" 
-                        required 
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                </div>
-                <div className='input-box-label'>
-                    <label htmlFor="email">Email:</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        required 
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-                <div className='input-box-label'>
-                    <label htmlFor="password">Password</label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        required 
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                <div className='input-box-submit'>
-                    <button type="submit">Register</button>
-                    <div>Already have an account?</div>
-                    <Link to="/login">Login</Link>
-                </div>
-            </form>
-        </div>
+        <Flex align='center' justify='center' h='80vh' w='100%'>
+            <Box bg='black' p={1} boxShadow='md' borderRadius='md' w='full' maxW='md' border='1px' borderColor='black'>
+                <Box bg='white' p={6} boxShadow='md' borderRadius='md'>
+                    <VStack spacing={4} align='stretch'>
+                        <Text fontSize='2xl'>Register</Text>
+                        <form onSubmit={handleRegister}>
+                            <FormControl id='username' isRequired>
+                                <FormLabel>Username:</FormLabel>
+                                <InputGroup>
+                                    <InputLeftElement pointerEvents='none' children={<AtSignIcon color='black' />} />
+                                    <Input 
+                                        type='text'
+                                        value={username} 
+                                        onChange={(e) => setUsername(e.target.value)}
+                                        borderColor='black'
+                                        color='black'
+                                    />
+                                </InputGroup>
+                            </FormControl>
+
+                            <FormControl id='email' isRequired>
+                                <FormLabel>Email:</FormLabel>
+                                <InputGroup>
+                                    <InputLeftElement pointerEvents='none' children={<EmailIcon color='black' />} />
+                                    <Input 
+                                        type='email'
+                                        value={email} 
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        borderColor='black'
+                                        color='black'
+                                    />
+                                </InputGroup>
+                            </FormControl>
+
+                            <FormControl id='password' isRequired>
+                                <FormLabel>Password:</FormLabel>
+                                <InputGroup>
+                                    <InputLeftElement pointerEvents='none' children={<LockIcon color='black' />} />
+                                    <Input 
+                                        type='password'
+                                        value={password} 
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        borderColor='black'
+                                        color='black'
+                                    />
+                                </InputGroup>
+                            </FormControl>
+
+                            <Button type='submit' colorScheme='blue' width='full' mt={4}>
+                                Register
+                            </Button>
+                        </form>
+                        <Text mt={2}>
+                            Already have an account?{' '}
+                            <ChakraLink color='teal.500' to="/login">
+                                Login
+                            </ChakraLink>
+                        </Text>
+                    </VStack>
+                </Box>
+            </Box>
+        </Flex>
     );
 };
 
