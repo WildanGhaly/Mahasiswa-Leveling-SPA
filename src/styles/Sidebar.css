@@ -9,3 +9,15 @@
     background-color: #333;
     overflow: hidden;
 }
+
+.container-ack {
+    display: flex;
+}
+
+.container-ack .content-ack {
+    position: relative;
+    height: 100%;
+    width: 80%;
+    background-color: #333;
+    overflow: hidden;
+}

@@ -5,28 +5,40 @@ import AboutPage from './pages/AboutPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import './App.css';
+import { ReactNode } from 'react';
+
+interface AppContainerProps {
+  children: ReactNode; 
+}
+
+// Update AppContainer to accept the correct props
+const AppContainer: React.FC<AppContainerProps> = ({ children }) => {
+  const auth = useAuth(); 
+  const containerClass = auth.isLoggedIn ? "container-ack" : "container-nack";
+  return <div className={containerClass}>{children}</div>;
+};
 
 function App() {
-  return (
-    <AuthProvider>
+return (
+  <AuthProvider>
     <BrowserRouter>
-    <div className="container">
-      <Navbar />
-      <div className="content">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-        </Routes>
-      </div>
-    </div>
+      <AppContainer>
+        <Navbar />
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
+          </Routes>
+        </div>
+      </AppContainer>
     </BrowserRouter>
-    </AuthProvider>
-  );
+  </AuthProvider>
+);
 }
 
 export default App;
