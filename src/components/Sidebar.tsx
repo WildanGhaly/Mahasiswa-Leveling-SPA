@@ -1,25 +1,85 @@
-import { Link } from 'react-router-dom';
-import { useAuth } from './../context/AuthContext';
-import './../styles/Sidebar.css';
+import React, { useState } from 'react';
+import {
+    Flex,
+    Text,
+    IconButton,
+    Divider,
+    Avatar,
+    Heading
+} from '@chakra-ui/react';
+import {
+    FiMenu,
+    FiHome,
+    FiPlusCircle,
+    FiShoppingBag,
+    FiClock,
+    FiSettings
+} from 'react-icons/fi';
+import NavItem from '../components/NavItem';
+import { useNavigate } from 'react-router-dom';
+import "../styles/sidebar.css";
 
-const Sidebar = () => {
-  const { logout } = useAuth();
+const Sidebar: React.FC = () => {
+  const [navSize, changeNavSize] = useState<"small" | "large">("large");
+  const [activeItem, setActiveItem] = useState<string>("dashboard");
+  const navigate = useNavigate();
 
-  const handleLogout = (e: React.FormEvent) => {
-    e.preventDefault();
-    logout();
-  }
+  const handleItemClick = (name: string) => {
+      setActiveItem(name);
+      navigate(`/${name}`);
+  };
 
-  return (
-    <div className='sidebar-container'>
-      <Link to="/home">Home</Link>
-      <Link to="/topup">Top Up</Link>
-      <Link to="/merchant">Merchant</Link>
-      <Link to="/history">History</Link>
-      <Link to="/profile">Profile</Link>
-      <button onClick={handleLogout}>Sign Out</button>
-    </div>
-  );
-};
+    return (
+        <Flex
+            pos="sticky"
+            left="2.5"
+            h="95vh"
+            margin="2.5vh"
+            boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
+            borderRadius={navSize === "small" ? "15px" : "30px"}
+            w={navSize === "small" ? "75px" : "200px"}
+            flexDir="column"
+            justifyContent="space-between"
+        >
+            <Flex
+              p="5%"
+              flexDir="column"
+              w="100%"
+              alignItems={navSize === "small" ? "center" : "flex-start"}
+              as="nav"
+          >
+              <IconButton
+                background="none"
+                mt={5}
+                _hover={{ background: 'none' }}
+                icon={<FiMenu />}
+                onClick={() => changeNavSize(navSize === "small" ? "large" : "small")} aria-label={''}                
+              />
+              <NavItem navSize={navSize} icon={FiHome} title="Dashboard" active={activeItem === "dashboard"} onClick={() => handleItemClick("dashboard")} />
+              <NavItem navSize={navSize} icon={FiPlusCircle} title="Top Up" active={activeItem === "topup"} onClick={() => handleItemClick("topup")} />
+              <NavItem navSize={navSize} icon={FiShoppingBag} title="Merchant" active={activeItem === "merchant"} onClick={() => handleItemClick("merchant")} />
+              <NavItem navSize={navSize} icon={FiClock} title="History" active={activeItem === "history"} onClick={() => handleItemClick("history")} />
+              <NavItem navSize={navSize} icon={FiSettings} title="Settings" active={activeItem === "settings"} onClick={() => handleItemClick("settings")} />    
+          </Flex>
+
+            <Flex
+                p="5%"
+                flexDir="column"
+                w="100%"
+                alignItems={navSize === "small" ? "center" : "flex-start"}
+                mb={4}
+            >
+                <Divider display={navSize === "small" ? "none" : "flex"} />
+                <Flex mt={4} align="center">
+                    <Avatar size="sm" src="avatar-1.jpg" />
+                    <Flex flexDir="column" ml={4} display={navSize === "small" ? "none" : "flex"}>
+                        <Heading as="h3" size="sm">WILDAN GHALY</Heading>
+                        <Text color="gray">Admin</Text>
+                    </Flex>
+                </Flex>
+            </Flex>
+        </Flex>
+    );
+}
 
 export default Sidebar;
