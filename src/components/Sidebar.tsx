@@ -12,8 +12,11 @@ const Sidebar = () => {
 
   return (
     <div className='sidebar-container'>
-      <Link to="/dashboard">Dashboard</Link>
-      <Link to="/about">About</Link>
+      <Link to="/home">Home</Link>
+      <Link to="/topup">Top Up</Link>
+      <Link to="/merchant">Merchant</Link>
+      <Link to="/history">History</Link>
+      <Link to="/profile">Profile</Link>
       <button onClick={handleLogout}>Sign Out</button>
     </div>
   );
