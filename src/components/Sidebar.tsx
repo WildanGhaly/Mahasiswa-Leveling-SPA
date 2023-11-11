@@ -18,11 +18,13 @@ import {
 import NavItem from '../components/NavItem';
 import { useNavigate } from 'react-router-dom';
 import "../styles/sidebar.css";
+import { useAuth } from '../context/AuthContext';
 
 const Sidebar: React.FC = () => {
   const [navSize, changeNavSize] = useState<"small" | "large">("large");
   const [activeItem, setActiveItem] = useState<string>("dashboard");
   const navigate = useNavigate();
+  const { username } = useAuth();
 
   const handleItemClick = (name: string) => {
       setActiveItem(name);
@@ -73,8 +75,8 @@ const Sidebar: React.FC = () => {
                 <Flex mt={4} align="center">
                     <Avatar size="sm" src="avatar-1.jpg" />
                     <Flex flexDir="column" ml={4} display={navSize === "small" ? "none" : "flex"}>
-                        <Heading as="h3" size="sm">WILDAN GHALY</Heading>
-                        <Text color="gray">Admin</Text>
+                        <Heading as="h3" size="sm">{username}</Heading>
+                        <Text color="gray">User</Text>
                     </Flex>
                 </Flex>
             </Flex>
