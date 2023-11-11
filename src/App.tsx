@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { ChakraProvider } from '@chakra-ui/react';
 import './App.css';
 import { ReactNode } from 'react';
 
@@ -21,24 +22,26 @@ const AppContainer: React.FC<AppContainerProps> = ({ children }) => {
 };
 
 function App() {
-return (
-  <AuthProvider>
-    <BrowserRouter>
-      <AppContainer>
-        <Navbar />
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/dashboard" element={<DashboardPage />} />
-          </Routes>
-        </div>
-      </AppContainer>
-    </BrowserRouter>
-  </AuthProvider>
-);
+  return (
+    <ChakraProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <AppContainer>
+            <Navbar />
+            <div className="content">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/dashboard" element={<DashboardPage />} />
+              </Routes>
+            </div>
+          </AppContainer>
+        </BrowserRouter>
+      </AuthProvider>
+    </ChakraProvider>
+  );
 }
 
 export default App;
