@@ -39,7 +39,7 @@ const Sidebar: React.FC = () => {
             margin="2.5vh"
             boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
             borderRadius={navSize === "small" ? "15px" : "30px"}
-            w={navSize === "small" ? "75px" : "200px"}
+            w={navSize === "small" ? "5vw" : "20vw"}
             flexDir="column"
             justifyContent="space-between"
         >
