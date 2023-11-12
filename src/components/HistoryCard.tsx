@@ -8,19 +8,23 @@ import {
     IconButton,
   } from '@chakra-ui/react';
   import { CalendarIcon } from '@chakra-ui/icons';
+import { Link } from 'react-router-dom';
   
   interface HistoryCardProps {
     name: string;
     date: string;
     imageSrc: string;
+    id: string;
   }
   
   const HistoryCard: React.FC<HistoryCardProps> = ({
     name,
     date,
     imageSrc,
+    id,
   }) => {
     return (
+        <Link to={`/History/${id}`}>
       <Box
         borderWidth="1px"
         borderRadius="lg"
@@ -55,6 +59,7 @@ import {
           </Flex>
         </Box>
       </Box>
+      </Link>
     );
   };
   
