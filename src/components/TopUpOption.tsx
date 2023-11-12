@@ -26,9 +26,20 @@ const TopUpOption: React.FC<TopUpOptionProps> = ({ imageSrc, amount }) => {
 
   return (
     <Box>
-      <Button onClick={onOpen}>
-        <Flex direction="column" alignItems="center" maxW="150px">
-          <Image src={imageSrc} alt={`Top up ${amount}`} />
+      <Button onClick={onOpen}
+        h="350px" 
+        bg="gray.200"
+        overflow="hidden"
+        position="relative"
+      >
+        <Flex direction="column" alignItems="center" maxW="275px">
+            <Image 
+                src={imageSrc} 
+                alt={`Top up ${amount}`} 
+                objectFit="cover"
+                w="100%" 
+                h="100%" 
+            />
           <Flex alignItems="center">
             <Icon as={FaDollarSign} fontSize="2xl" color="green.500" />
             <Text>{amount}</Text>
