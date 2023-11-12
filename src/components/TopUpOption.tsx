@@ -25,7 +25,12 @@ const TopUpOption: React.FC<TopUpOptionProps> = ({ imageSrc, amount }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box>
+    <Box
+        borderWidth="1px"
+        borderRadius="lg"
+        overflow="hidden"
+        boxShadow="md"
+    >
       <Button onClick={onOpen}
         h="350px" 
         bg="gray.200"

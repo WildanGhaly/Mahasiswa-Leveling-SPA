@@ -1,8 +1,9 @@
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { Flex, Heading, Text } from "@chakra-ui/react";
+import { Container, SimpleGrid } from "@chakra-ui/react";
 import TopUpOption from "./../components/TopUpOption";
 import CustomAmountTopUp from "./../components/CustomAmountTopUp";
+import ReusableHeader from "../components/ReusableHeader";
 
 const TopUpPage = () => {
   const { isLoggedIn } = useAuth();
@@ -14,12 +15,9 @@ const TopUpPage = () => {
   }
 
   return (
-    <Flex direction="column" align="center" mt={4}>
-      <Heading as="h1" mb={4}>
-        Top Up Page
-      </Heading>
-      <Text>Welcome to the Top Up Page!</Text>
-      <Flex justify="space-between" mt={4}>
+    <Container maxW="container.lg">
+      <ReusableHeader headingName="Top Up" />
+      <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={7}>
         {/* Render 6 top-up options */}
         <TopUpOption imageSrc="public/image/1.jpg" amount={10} />
         <TopUpOption imageSrc="public/image/1.jpg" amount={20} />
@@ -27,10 +25,10 @@ const TopUpPage = () => {
         <TopUpOption imageSrc="public/image/1.jpg" amount={50} />
         <TopUpOption imageSrc="public/image/1.jpg" amount={100} />
         <TopUpOption imageSrc="public/image/1.jpg" amount={200} />
-      </Flex>
+      </SimpleGrid>
       {/* Render the custom amount top-up component */}
       <CustomAmountTopUp />
-    </Flex>
+    </Container>
   );
 };
 
