@@ -59,7 +59,7 @@ const Sidebar: React.FC = () => {
               />
               <NavItem navSize={navSize} icon={FiHome} title="Dashboard" active={activeItem === "dashboard"} onClick={() => handleItemClick("dashboard")} />
               <NavItem navSize={navSize} icon={FiPlusCircle} title="Top Up" active={activeItem === "topup"} onClick={() => handleItemClick("topup")} />
-              <NavItem navSize={navSize} icon={FiShoppingBag} title="Merchant" active={activeItem === "merchant"} onClick={() => handleItemClick("merchant")} />
+              <NavItem navSize={navSize} icon={FiShoppingBag} title="My Merchant" active={activeItem === "merchant"} onClick={() => handleItemClick("merchant")} />
               <NavItem navSize={navSize} icon={FiClock} title="History" active={activeItem === "history"} onClick={() => handleItemClick("history")} />
               <NavItem navSize={navSize} icon={FiSettings} title="Settings" active={activeItem === "settings"} onClick={() => handleItemClick("settings")} />    
           </Flex>
