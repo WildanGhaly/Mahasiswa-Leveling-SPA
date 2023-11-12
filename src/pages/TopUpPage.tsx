@@ -20,12 +20,12 @@ const TopUpPage = () => {
       <CustomAmountTopUp />
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={7}>
         {/* Render 6 top-up options */}
-        <TopUpOption imageSrc="public/image/1.jpg" amount={10} />
-        <TopUpOption imageSrc="public/image/1.jpg" amount={20} />
-        <TopUpOption imageSrc="public/image/1.jpg" amount={30} />
-        <TopUpOption imageSrc="public/image/1.jpg" amount={50} />
-        <TopUpOption imageSrc="public/image/1.jpg" amount={100} />
-        <TopUpOption imageSrc="public/image/1.jpg" amount={200} />
+        <TopUpOption imageSrc="public/image/money/1.png" amount={10} />
+        <TopUpOption imageSrc="public/image/money/2.png" amount={20} />
+        <TopUpOption imageSrc="public/image/money/3.png" amount={30} />
+        <TopUpOption imageSrc="public/image/money/4.png" amount={50} />
+        <TopUpOption imageSrc="public/image/money/5.png" amount={100} />
+        <TopUpOption imageSrc="public/image/money/6.png" amount={200} />
       </SimpleGrid>
       {/* Render the custom amount top-up component */}
     </Container>
