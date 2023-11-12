@@ -3,17 +3,15 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
-  Heading,
   Input,
   Flex,
-  Spacer,
-  Badge,
   SimpleGrid,
   Select,
   Icon,
 } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import ProductCard from '../components/ProductCard'; // Create this component separately
+import ReusableHeader from '../components/ReusableHeader';
 
 const DashboardPage = () => {
   const { isLoggedIn } = useAuth();
@@ -25,18 +23,7 @@ const DashboardPage = () => {
 
   return (
     <Container maxW="container.lg">
-      <Flex align="center" justify="space-between" py={4}>
-        <Heading>Dashboard</Heading>
-        <Flex align="center">
-          <Spacer />
-          <Badge colorScheme="green" mr={2}>
-            My Points: 500
-          </Badge>
-          <Badge colorScheme="purple">
-            My Money: $100
-          </Badge>
-        </Flex>
-      </Flex>
+      <ReusableHeader headingName="Dashboard" />
       <Flex align="center" justify="space-between" py={4}>
         <Flex mr={4} align="center" w="70%">
           <Icon as={SearchIcon} mr={2} />
