@@ -30,7 +30,14 @@ const CustomAmountTopUp: React.FC = () => {
 
   return (
     <Box>
-      <Button onClick={onOpen}>Or Type the Amount</Button>
+        <Button 
+            onClick={onOpen}
+            w="100%"
+            colorScheme="green"
+            margin="10px 0 15px 0"
+        >
+            Type the Amount
+        </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

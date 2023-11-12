@@ -28,7 +28,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       boxShadow="md"
     >
       <Box
-        h="200px" // Set the desired square height
+        h="200px" 
         bg="gray.200"
         overflow="hidden"
         position="relative"
@@ -36,9 +36,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <Image
           src={imageSrc}
           alt={name}
-          objectFit="cover" // Maintain aspect ratio and cover the entire square
-          w="100%" // Make the image take the full width of the square
-          h="100%" // Make the image take the full height of the square
+          objectFit="cover"
+          w="100%" 
+          h="100%" 
         />
       </Box>
       <Box p={4}>

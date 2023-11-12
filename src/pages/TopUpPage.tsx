@@ -17,6 +17,7 @@ const TopUpPage = () => {
   return (
     <Container maxW="container.lg">
       <ReusableHeader headingName="Top Up" />
+      <CustomAmountTopUp />
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={7}>
         {/* Render 6 top-up options */}
         <TopUpOption imageSrc="public/image/1.jpg" amount={10} />
@@ -27,7 +28,6 @@ const TopUpPage = () => {
         <TopUpOption imageSrc="public/image/1.jpg" amount={200} />
       </SimpleGrid>
       {/* Render the custom amount top-up component */}
-      <CustomAmountTopUp />
     </Container>
   );
 };
