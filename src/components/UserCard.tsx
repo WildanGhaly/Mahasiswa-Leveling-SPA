@@ -29,26 +29,26 @@ import {
     return (
       <Box borderWidth='1px' borderRadius='lg' p={4} boxShadow='md' marginTop="5vh">
         <HStack spacing={4}>
-          <Avatar name={name} src='//path/to/dummy/profile.jpg' size='xl' margin="0 20px" />
+          <Avatar name={name} src='//path/to/dummy/profile.jpg' size='2xl' margin="0 20px" />
           <VStack align='stretch'>
             <HStack>
               <Icon as={StarIcon} color='yellow.400' />
-              <Text fontWeight='bold'>{name}</Text>
+              <Text fontSize="2xl" fontWeight='bold'>{name}</Text>
             </HStack>
             <HStack>
               <Icon as={AtSignIcon} />
-              <Text>{username}</Text>
+              <Text fontSize="xl">{username}</Text>
             </HStack>
             <HStack>
               <Icon as={EmailIcon} />
-              <Text>{email}</Text>
+              <Text fontSize="xl">{email}</Text>
             </HStack>
             <HStack>
               <Icon as={CheckCircleIcon} />
-              <Text>{`Points: ${points}`}</Text>
+              <Text fontSize="xl">{`Points: ${points}`}</Text>
             </HStack>
             <FormControl display='flex' alignItems='center'>
-              <FormLabel htmlFor='email-toggle' mb='0'>
+              <FormLabel fontSize="xl" htmlFor='email-toggle' mb='0'>
                 Get notify by email
               </FormLabel>
               <Switch id='email-toggle' onChange={onToggleEmailNotify} />
