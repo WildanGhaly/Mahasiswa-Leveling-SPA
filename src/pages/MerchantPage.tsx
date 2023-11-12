@@ -27,9 +27,9 @@ const MerchantPage = () => {
               <option value="option2">Option 2</option>
             </Select>
           </Flex>
-          {/* Product Listings */}
+          {/* Merch Listings */}
           <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={4}>
-            {/* Product Card Component */}
+            {/* Merch Card Component */}
             <MerchCard
               name="Product 1"
               imageSrc="public/image/1.jpg"
