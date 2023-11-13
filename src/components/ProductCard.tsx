@@ -5,13 +5,12 @@ import {
   Badge,
   Text,
   Flex,
-  IconButton,
 } from '@chakra-ui/react';
-import { AddIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
 
 interface ProductCardProps {
   id: string;
+  stock: string;
   name: string;
   price: string;
   imageSrc: string;
@@ -19,6 +18,7 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({
   id,
+  stock,
   name,
   price,
   imageSrc,
@@ -53,12 +53,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           Price: {price}
         </Text>
         <Flex align="center" justify="flex-end">
-          <IconButton
-            aria-label="Add to Cart"
-            icon={<AddIcon />}
-            variant="ghost"
-          />
-          <Badge colorScheme="green">In Stock</Badge>
+          <Badge colorScheme="green">Stock: {stock}</Badge>
         </Flex>
       </Box>
     </Box>

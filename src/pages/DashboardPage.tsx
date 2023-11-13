@@ -39,36 +39,42 @@ const DashboardPage = () => {
         {/* Product Card Component */}
         <ProductCard
           id="1"
+          stock="10"
           name="Product 1"
           price="$20"
           imageSrc="public/image/1.jpg"
         />
         <ProductCard
           id="2"
+          stock="20"
           name="Product 2"
           price="$30"
           imageSrc="public/image/2.jpg"
         />
         <ProductCard
           id="3"
+          stock="30"
           name="Product 3"
           price="$100"
           imageSrc="public/image/3.jpg"
         />
         <ProductCard
           id="4"
+          stock="40"
           name="Product 4"
           price="$20"
           imageSrc="public/image/4.jpg"
         />
         <ProductCard
           id="5"
+          stock="50"
           name="Product 5"
           price="$30"
           imageSrc="public/image/5.jpg"
         />
         <ProductCard
           id="6"
+          stock="60"
           name="Product 6"
           price="$100"
           imageSrc="public/image/6.jpg"
