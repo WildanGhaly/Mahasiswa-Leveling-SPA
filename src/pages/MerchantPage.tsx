@@ -32,26 +32,32 @@ const MerchantPage = () => {
             {/* Merch Card Component */}
             <MerchCard
               name="Product 1"
+              quantity="1"
               imageSrc="public/image/1.jpg"
             />
             <MerchCard
               name="Product 2"
+              quantity="2"
               imageSrc="public/image/2.jpg"
             />
             <MerchCard
               name="Product 3"
+              quantity="3"
               imageSrc="public/image/3.jpg"
             />
             <MerchCard
               name="Product 4"
+              quantity="4"
               imageSrc="public/image/4.jpg"
             />
             <MerchCard
               name="Product 5"
+              quantity="5"
               imageSrc="public/image/5.jpg"
             />
             <MerchCard
               name="Product 6"
+              quantity="6"
               imageSrc="public/image/6.jpg"
             />
             {/* Add more product cards */}

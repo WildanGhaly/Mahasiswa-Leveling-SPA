@@ -9,11 +9,13 @@ import {
   
   interface MerchCardProps {
     name: string;
+    quantity: string;
     imageSrc: string;
   }
   
   const MerchCard: React.FC<MerchCardProps> = ({
     name,
+    quantity,
     imageSrc,
   }) => {
     return (
@@ -42,7 +44,7 @@ import {
             {name}
           </Text>
           <Flex align="center" justify="flex-end">
-            <Badge colorScheme="green">Obtained</Badge>
+            <Badge colorScheme="green">Obtained {quantity}</Badge>
           </Flex>
         </Box>
       </Box>
