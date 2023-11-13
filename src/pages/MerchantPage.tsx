@@ -4,15 +4,25 @@ import MerchCard from "../components/MerchCard";
 import ReusableHeader from "../components/ReusableHeader";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getMerchant } from "../services/merchantService";
+import { Merchant } from "../types/merchant";
 
 const MerchantPage = () => {
 
     const { isLoggedIn } = useAuth();
     const navigate = useNavigate();
+    const [merchants, setMerchants] = useState<Merchant[]>([]);
 
-    if (!isLoggedIn) {
-        navigate('/login');
-    }
+    useEffect(() => {
+        if (!isLoggedIn) {
+            navigate('/login');
+        } else {
+            getMerchant().then(data => {
+                setMerchants(data);
+            });
+        }
+    }, [isLoggedIn, navigate]);
 
     return (
         <Container maxW="container.lg">
@@ -29,38 +39,14 @@ const MerchantPage = () => {
           </Flex>
           {/* Merch Listings */}
           <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={4}>
-            {/* Merch Card Component */}
-            <MerchCard
-              name="Product 1"
-              quantity="1"
-              imageSrc="public/image/1.jpg"
-            />
-            <MerchCard
-              name="Product 2"
-              quantity="2"
-              imageSrc="public/image/2.jpg"
-            />
-            <MerchCard
-              name="Product 3"
-              quantity="3"
-              imageSrc="public/image/3.jpg"
-            />
-            <MerchCard
-              name="Product 4"
-              quantity="4"
-              imageSrc="public/image/4.jpg"
-            />
-            <MerchCard
-              name="Product 5"
-              quantity="5"
-              imageSrc="public/image/5.jpg"
-            />
-            <MerchCard
-              name="Product 6"
-              quantity="6"
-              imageSrc="public/image/6.jpg"
-            />
-            {/* Add more product cards */}
+          {merchants.map(merchants => (
+          <MerchCard
+              id={merchants.MerchantID}
+              quantity={merchants.MerchantQuantity}
+              name={merchants.MerchantName}
+              imageSrc={merchants.MerchantImagePath}
+          />
+          ))}
           </SimpleGrid>
         </Container>
     );
