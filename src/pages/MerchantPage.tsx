@@ -41,6 +41,7 @@ const MerchantPage = () => {
           <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={4}>
           {merchants.map(merchants => (
           <MerchCard
+              key={merchants.MerchantID}
               id={merchants.MerchantID}
               quantity={merchants.MerchantQuantity}
               name={merchants.MerchantName}

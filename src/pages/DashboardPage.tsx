@@ -48,6 +48,7 @@ const DashboardPage = () => {
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={4}>
         {products.map(product => (
           <ProductCard
+            key={product.ProductID}
             id={product.ProductID}
             stock={product.StockQuantity}
             name={product.ProductName}
