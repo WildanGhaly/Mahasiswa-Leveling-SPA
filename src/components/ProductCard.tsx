@@ -8,19 +8,23 @@ import {
   IconButton,
 } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
+import { Link } from 'react-router-dom';
 
 interface ProductCardProps {
+  id: string;
   name: string;
   price: string;
   imageSrc: string;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
+  id,
   name,
   price,
   imageSrc,
 }) => {
   return (
+    <Link to={`/Product/${id}`}>
     <Box
       borderWidth="1px"
       borderRadius="lg"
@@ -58,6 +62,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </Flex>
       </Box>
     </Box>
+  </Link>
   );
 };
 
