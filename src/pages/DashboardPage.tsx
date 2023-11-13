@@ -12,15 +12,25 @@ import {
 import { SearchIcon } from '@chakra-ui/icons';
 import ProductCard from '../components/ProductCard'; // Create this component separately
 import ReusableHeader from '../components/ReusableHeader';
+import { getProducts } from '../services/productService';
+import { useEffect, useState } from 'react';
+import { Product } from '../types/product';
 
 const DashboardPage = () => {
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
+  const [products, setProducts] = useState<Product[]>([]);
 
-  if (!isLoggedIn) {
-    navigate('/login');
-  }
-
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/login');
+    } else {
+      getProducts().then(data => {
+        setProducts(data);
+      });
+    }
+  }, [isLoggedIn, navigate]);
+  
   return (
     <Container maxW="container.lg">
       <ReusableHeader headingName="Dashboard" />
@@ -36,38 +46,16 @@ const DashboardPage = () => {
       </Flex>
       {/* Product Listings */}
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={4}>
-        {/* Product Card Component */}
-        <ProductCard
-          name="Product 1"
-          price="$20"
-          imageSrc="public/image/1.jpg"
-        />
-        <ProductCard
-          name="Product 2"
-          price="$30"
-          imageSrc="public/image/2.jpg"
-        />
-        <ProductCard
-          name="Product 3"
-          price="$100"
-          imageSrc="public/image/3.jpg"
-        />
-        <ProductCard
-          name="Product 4"
-          price="$20"
-          imageSrc="public/image/4.jpg"
-        />
-        <ProductCard
-          name="Product 5"
-          price="$30"
-          imageSrc="public/image/5.jpg"
-        />
-        <ProductCard
-          name="Product 6"
-          price="$100"
-          imageSrc="public/image/6.jpg"
-        />
-        {/* Add more product cards */}
+        {products.map(product => (
+          <ProductCard
+            key={product.ProductID}
+            id={product.ProductID}
+            stock={product.StockQuantity}
+            name={product.ProductName}
+            price={product.Price}
+            imageSrc={product.ImagePath}
+          />
+        ))}
       </SimpleGrid>
     </Container>
   );

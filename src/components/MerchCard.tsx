@@ -8,12 +8,16 @@ import {
   } from '@chakra-ui/react';
   
   interface MerchCardProps {
+    id: string;
     name: string;
+    quantity: string;
     imageSrc: string;
   }
   
   const MerchCard: React.FC<MerchCardProps> = ({
+    id,
     name,
+    quantity,
     imageSrc,
   }) => {
     return (
@@ -39,10 +43,10 @@ import {
         </Box>
         <Box p={4}>
           <Text fontWeight="semibold" fontSize="lg">
-            {name}
+            {id} {name}
           </Text>
           <Flex align="center" justify="flex-end">
-            <Badge colorScheme="green">Obtained</Badge>
+            <Badge colorScheme="green">Obtained {quantity}</Badge>
           </Flex>
         </Box>
       </Box>
