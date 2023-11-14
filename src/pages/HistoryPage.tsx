@@ -4,15 +4,25 @@ import HistoryCard from "../components/HistoryCard";
 import ReusableHeader from "../components/ReusableHeader";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getHistory } from "../services/historyService";
+import { History } from "../types/history";
 
 const HistoryPage = () => {
 
     const { isLoggedIn } = useAuth();
     const navigate = useNavigate();
+    const [historys, setHistorys] = useState<History[]>([]);
 
-    if (!isLoggedIn) {
-        navigate('/login');
-    }
+    useEffect(() => {
+        if (!isLoggedIn) {
+            navigate('/login');
+        } else {
+            getHistory().then(data => {
+                setHistorys(data);
+            });
+        }
+    }, [isLoggedIn, navigate]);
 
     return (
         <Container maxW="container.lg">
@@ -29,50 +39,16 @@ const HistoryPage = () => {
           </Flex>
           {/* Product Listings */}
           <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={4}>
-            {/* Product Card Component */}
-            <HistoryCard
-                name="Product 1"
-                quantity="1"
-                imageSrc="public/image/1.jpg"
-                date="2023-11-01"
-                id="1"
-            />
-            <HistoryCard
-                name="Product 2"
-                quantity="2"
-                imageSrc="public/image/2.jpg"
-                date="2023-11-02"
-                id="2"
-            />
-            <HistoryCard
-                name="Product 3"
-                quantity="3"
-                imageSrc="public/image/3.jpg"
-                date="2023-11-03"
-                id="3"
-            />
-            <HistoryCard
-                name="Product 4"
-                quantity="100"
-                imageSrc="public/image/4.jpg"
-                date="2023-11-04"
-                id="4"
-            />
-            <HistoryCard
-                name="Product 5"
-                quantity="10"
-                imageSrc="public/image/5.jpg"
-                date="2023-11-05"
-                id="5"
-            />
-            <HistoryCard
-                name="Product 6"
-                quantity="1"
-                imageSrc="public/image/6.jpg"
-                date="2023-11-06"
-                id="6"
-            />
-            {/* Add more product cards */}
+            {historys.map(history => (
+              <HistoryCard
+                key={history.HistoryID}
+                id={history.HistoryID}
+                quantity={history.HistoryQuantity}
+                name={history.HistoryProductName}
+                date={history.HistoryDate}
+                imageSrc={history.HistoryImagePath}
+              />
+            ))}
           </SimpleGrid>
         </Container>
       );
