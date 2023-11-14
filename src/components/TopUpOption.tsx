@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Image,
@@ -9,6 +9,9 @@ import {
 } from "@chakra-ui/react";
 import { FaDollarSign } from "react-icons/fa"; // Import the dollar sign icon
 import ConfirmationModal from "./ConfirmationModal";
+import axios from "axios";
+import SuccessModal from "./SuccessModal"; // Import the SuccessModal component
+import ErrorModal from "./ErrorModal"; // Import the ErrorModal component
 
 interface TopUpOptionProps {
   imageSrc: string;
@@ -17,15 +20,35 @@ interface TopUpOptionProps {
 
 const TopUpOption: React.FC<TopUpOptionProps> = ({ imageSrc, amount }) => {
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = React.useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleTopUp = () => {
+  const handleTopUp = async () => {
     // Handle top-up action here
     setIsConfirmationModalOpen(true); // Open the confirmation modal
   };
 
-  const confirmTopUp = () => {
+  const confirmTopUp = async () => {
     // Handle the confirmation and complete the top-up
     // Close the confirmation modal
+    try {
+      // Make an asynchronous Axios request to your backend (assuming it's running on port 8080)
+      const response = await axios.post("http://localhost:8080/topup", { amount }, { withCredentials: true});
+
+      // Check if the top-up was successful
+      if (response.data.success) {
+        setIsSuccessModalOpen(true);
+      } else {
+        setIsErrorModalOpen(true);
+        setErrorMessage("Top-up failed. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setIsErrorModalOpen(true);
+      setErrorMessage("An error occurred while processing your top-up request.");
+    }
+
     setIsConfirmationModalOpen(false);
   };
 
@@ -66,6 +89,9 @@ const TopUpOption: React.FC<TopUpOptionProps> = ({ imageSrc, amount }) => {
         title="Confirm Payment"
         message={`Are you sure you want to top up $${amount}?`}
       />
+
+      <SuccessModal isOpen={isSuccessModalOpen} onClose={() => setIsSuccessModalOpen(false)} />
+      <ErrorModal isOpen={isErrorModalOpen} onClose={() => setIsErrorModalOpen(false)} errorMessage={errorMessage} />
     </Box>
   );
 };
