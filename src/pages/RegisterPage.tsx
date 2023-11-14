@@ -21,7 +21,7 @@ const RegisterPage = () => {
     const handleApiRegister = async (username: string, email: string, password: string) => {
         try {
             console.log('Registering...');
-            const response = await axios.post('http://localhost:8080/register', {
+            const response = await axios.post('http://localhost:8080/auth/register', {
                 username,
                 email,
                 password

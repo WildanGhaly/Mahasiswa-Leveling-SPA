@@ -31,7 +31,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         // Cek apakah user sudah login dengan mengirim request ke backend
         const checkLoginStatus = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/check-status', { withCredentials: true });
+                const response = await axios.get('http://localhost:8080/user/check-status', { withCredentials: true });
                 console.log('Login status', response);
                 setIsLoggedIn(response.data.isLoggedIn);
                 setUsername(response.data.username);
