@@ -4,17 +4,11 @@ import {
   Image,
   Text,
   Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
   Flex,
   Icon,
 } from "@chakra-ui/react";
 import { FaDollarSign } from "react-icons/fa"; // Import the dollar sign icon
+import ConfirmationModal from "./ConfirmationModal";
 
 interface TopUpOptionProps {
   imageSrc: string;
@@ -22,19 +16,29 @@ interface TopUpOptionProps {
 }
 
 const TopUpOption: React.FC<TopUpOptionProps> = ({ imageSrc, amount }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = React.useState(false);
+
+  const handleTopUp = () => {
+    // Handle top-up action here
+    setIsConfirmationModalOpen(true); // Open the confirmation modal
+  };
+
+  const confirmTopUp = () => {
+    // Handle the confirmation and complete the top-up
+    // Close the confirmation modal
+    setIsConfirmationModalOpen(false);
+  };
 
   return (
-    <Box
-        borderRadius="lg"
-        overflow="hidden"
-    >
-      <Button onClick={onOpen}
-        h="350px" 
+    <Box borderRadius="lg" overflow="hidden">
+      <Button
+        onClick={handleTopUp}
+        h="350px"
         bg="gray.200"
         overflow="hidden"
         position="relative"
       >
+
         <Flex direction="column" alignItems="center" maxW="275px">
             <Image 
                 src={imageSrc} 
@@ -55,25 +59,13 @@ const TopUpOption: React.FC<TopUpOptionProps> = ({ imageSrc, amount }) => {
         </Flex>
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Confirm Payment</ModalHeader>
-          <ModalBody>
-            {/* Payment confirmation content */}
-            <p>Are you sure you want to top up ${amount}?</p>
-            {/* Add payment confirmation UI here */}
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme="green" onClick={onClose}>
-              Confirm
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <ConfirmationModal
+        isOpen={isConfirmationModalOpen}
+        onClose={() => setIsConfirmationModalOpen(false)}
+        onConfirm={confirmTopUp}
+        title="Confirm Payment"
+        message={`Are you sure you want to top up $${amount}?`}
+      />
     </Box>
   );
 };
