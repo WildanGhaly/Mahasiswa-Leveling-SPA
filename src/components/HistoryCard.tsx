@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
   
   interface HistoryCardProps {
     name: string;
+    quantity: string;
     date: string;
     imageSrc: string;
     id: string;
@@ -19,6 +20,7 @@ import { Link } from 'react-router-dom';
   
   const HistoryCard: React.FC<HistoryCardProps> = ({
     name,
+    quantity,
     date,
     imageSrc,
     id,
@@ -47,11 +49,11 @@ import { Link } from 'react-router-dom';
         </Box>
         <Box p={4}>
           <Text fontWeight="semibold" fontSize="lg">
-            {name}
+            {quantity} {name}
           </Text>
           <Flex align="center" justify="flex-end">
             <IconButton
-              aria-label="Add to Cart"
+              aria-label="Date"
               icon={<CalendarIcon />}
               variant="ghost"
             />
