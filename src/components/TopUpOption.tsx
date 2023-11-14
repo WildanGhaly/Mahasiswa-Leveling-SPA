@@ -1,20 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Image,
   Text,
   Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
   Flex,
   Icon,
 } from "@chakra-ui/react";
 import { FaDollarSign } from "react-icons/fa"; // Import the dollar sign icon
+import ConfirmationModal from "./ConfirmationModal";
+import axios from "axios";
+import SuccessModal from "./SuccessModal"; // Import the SuccessModal component
+import ErrorModal from "./ErrorModal"; // Import the ErrorModal component
 
 interface TopUpOptionProps {
   imageSrc: string;
@@ -22,19 +19,49 @@ interface TopUpOptionProps {
 }
 
 const TopUpOption: React.FC<TopUpOptionProps> = ({ imageSrc, amount }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = React.useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleTopUp = async () => {
+    // Handle top-up action here
+    setIsConfirmationModalOpen(true); // Open the confirmation modal
+  };
+
+  const confirmTopUp = async () => {
+    // Handle the confirmation and complete the top-up
+    // Close the confirmation modal
+    try {
+      // Make an asynchronous Axios request to your backend (assuming it's running on port 8080)
+      const response = await axios.post("http://localhost:8080/topup", { amount }, { withCredentials: true});
+
+      // Check if the top-up was successful
+      if (response.data.success) {
+        setIsSuccessModalOpen(true);
+      } else {
+        setIsErrorModalOpen(true);
+        setErrorMessage("Top-up failed. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setIsErrorModalOpen(true);
+      setErrorMessage("An error occurred while processing your top-up request.");
+    }
+
+    setIsConfirmationModalOpen(false);
+  };
 
   return (
-    <Box
-        borderRadius="lg"
-        overflow="hidden"
-    >
-      <Button onClick={onOpen}
-        h="350px" 
+    <Box borderRadius="lg" overflow="hidden">
+      <Button
+        onClick={handleTopUp}
+        h="350px"
         bg="gray.200"
         overflow="hidden"
         position="relative"
       >
+
         <Flex direction="column" alignItems="center" maxW="275px">
             <Image 
                 src={imageSrc} 
@@ -55,25 +82,16 @@ const TopUpOption: React.FC<TopUpOptionProps> = ({ imageSrc, amount }) => {
         </Flex>
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Confirm Payment</ModalHeader>
-          <ModalBody>
-            {/* Payment confirmation content */}
-            <p>Are you sure you want to top up ${amount}?</p>
-            {/* Add payment confirmation UI here */}
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme="green" onClick={onClose}>
-              Confirm
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <ConfirmationModal
+        isOpen={isConfirmationModalOpen}
+        onClose={() => setIsConfirmationModalOpen(false)}
+        onConfirm={confirmTopUp}
+        title="Confirm Payment"
+        message={`Are you sure you want to top up $${amount}?`}
+      />
+
+      <SuccessModal isOpen={isSuccessModalOpen} onClose={() => setIsSuccessModalOpen(false)} />
+      <ErrorModal isOpen={isErrorModalOpen} onClose={() => setIsErrorModalOpen(false)} errorMessage={errorMessage} />
     </Box>
   );
 };
