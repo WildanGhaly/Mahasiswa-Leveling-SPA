@@ -12,26 +12,52 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import ConfirmationModal from "./ConfirmationModal"; // Import the ConfirmationModal component
+import axios from "axios";
+import ErrorModal from "./ErrorModal";
+import SuccessModal from "./SuccessModal";
 
 const CustomAmountTopUp: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [customAmount, setCustomAmount] = useState<number | string>("");
-  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [amount, setAmount] = useState<number | string>("");
+
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = React.useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCustomAmount(e.target.value);
+    setAmount(e.target.value);
   };
 
   const handleCustomTopUp = () => {
     // Handle custom top-up here
 
-    console.log(`Custom top-up amount: ${customAmount}`);
+    console.log(`Custom top-up amount: ${amount}`);
     setIsConfirmationModalOpen(true); // Open the confirmation modal
   };
 
-  const confirmCustomTopUp = () => {
+  const confirmCustomTopUp = async () => {
     // Handle the confirmation and complete the custom top-up
     // Close the confirmation modal
+    
+    try {
+      // Make an asynchronous Axios request to your backend (assuming it's running on port 8080)
+      console.log("HSAdhjawda", amount);
+      const response = await axios.post("http://localhost:8080/topup", { amount }, { withCredentials: true});
+
+      // Check if the top-up was successful
+      if (response.data.success) {
+        setIsSuccessModalOpen(true);
+      } else {
+        setIsErrorModalOpen(true);
+        setErrorMessage("Top-up failed. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setIsErrorModalOpen(true);
+      setErrorMessage("An error occurred while processing your top-up request.");
+    }
+    
     setIsConfirmationModalOpen(false);
     onClose();
   };
@@ -47,7 +73,7 @@ const CustomAmountTopUp: React.FC = () => {
         onClose={() => setIsConfirmationModalOpen(false)}
         onConfirm={confirmCustomTopUp}
         title="Confirm Custom Top-Up"
-        message={`Are you sure you want to top up $${customAmount}?`}
+        message={`Are you sure you want to top up $${amount}?`}
       />
 
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -58,7 +84,7 @@ const CustomAmountTopUp: React.FC = () => {
             <p>Enter the amount you want to top up:</p>
             <Input
               type="number"
-              value={customAmount}
+              value={amount}
               onChange={handleAmountChange}
               placeholder="Enter amount"
             />
@@ -73,6 +99,8 @@ const CustomAmountTopUp: React.FC = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
+      <SuccessModal isOpen={isSuccessModalOpen} onClose={() => setIsSuccessModalOpen(false)} />
+      <ErrorModal isOpen={isErrorModalOpen} onClose={() => setIsErrorModalOpen(false)} errorMessage={errorMessage} />
     </Box>
   );
 };
