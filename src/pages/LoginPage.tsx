@@ -30,7 +30,7 @@ const LoginPage = () => {
     const handleApiLogin = async (username: string, password: string) => {
         try {
             console.log('Logging in...');
-            const response = await axios.post('http://localhost:8080/login', {
+            const response = await axios.post('http://localhost:8080/auth/login', {
                 username,
                 password
             }, { withCredentials: true });
