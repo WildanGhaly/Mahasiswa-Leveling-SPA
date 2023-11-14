@@ -32,36 +32,42 @@ const HistoryPage = () => {
             {/* Product Card Component */}
             <HistoryCard
                 name="Product 1"
+                quantity="1"
                 imageSrc="public/image/1.jpg"
                 date="2023-11-01"
                 id="1"
             />
             <HistoryCard
                 name="Product 2"
+                quantity="2"
                 imageSrc="public/image/2.jpg"
                 date="2023-11-02"
                 id="2"
             />
             <HistoryCard
                 name="Product 3"
+                quantity="3"
                 imageSrc="public/image/3.jpg"
                 date="2023-11-03"
                 id="3"
             />
             <HistoryCard
                 name="Product 4"
+                quantity="100"
                 imageSrc="public/image/4.jpg"
                 date="2023-11-04"
                 id="4"
             />
             <HistoryCard
                 name="Product 5"
+                quantity="10"
                 imageSrc="public/image/5.jpg"
                 date="2023-11-05"
                 id="5"
             />
             <HistoryCard
                 name="Product 6"
+                quantity="1"
                 imageSrc="public/image/6.jpg"
                 date="2023-11-06"
                 id="6"
