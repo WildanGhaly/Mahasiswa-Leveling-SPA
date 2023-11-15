@@ -1,3 +1,5 @@
+// src/components/modals/CustomAmountTopUpModal.tsx
+
 import React, { useState } from "react";
 import {
   Box,
@@ -11,7 +13,7 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import ConfirmationModal from "./ConfirmationModal"; // Import the ConfirmationModal component
+import ConfirmationModal from "./ConfirmationModal"; 
 import ErrorModal from "./ErrorModal";
 import SuccessModal from "./SuccessModal";
 import API from "../../api/api";
@@ -31,26 +33,18 @@ const CustomAmountTopUp: React.FC = () => {
   };
 
   const handleCustomTopUp = () => {
-    // Handle custom top-up here
-
     console.log(`Custom top-up amount: ${amount}`);
-    setIsConfirmationModalOpen(true); // Open the confirmation modal
+    setIsConfirmationModalOpen(true); 
   };
 
   const confirmCustomTopUp = async () => {
-    // Handle the confirmation and complete the custom top-up
-    // Close the confirmation modal
-
     try {
-      // Make an asynchronous Axios request to your backend (assuming it's running on port 8080)
-      console.log("HSAdhjawda", amount);
       const response = await API.post(
         "/topup",
         { amount },
         { withCredentials: true }
       );
 
-      // Check if the top-up was successful
       if (response.data.success) {
         setIsSuccessModalOpen(true);
       } else {

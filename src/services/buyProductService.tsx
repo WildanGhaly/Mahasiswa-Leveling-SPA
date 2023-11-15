@@ -1,3 +1,5 @@
+// src/components/services/buyProductService.tsx
+
 import API from "../api/api";
 
 export const buyProduct = async (productid: string, price: number, quantity: number) => {

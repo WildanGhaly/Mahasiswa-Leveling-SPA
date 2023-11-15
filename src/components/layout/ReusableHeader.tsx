@@ -1,3 +1,5 @@
+// src/components/layout/ReusableHeader.tsx
+
 import React from "react";
 import { Flex, Heading, Badge, Spacer } from "@chakra-ui/react";
 

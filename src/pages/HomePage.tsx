@@ -1,3 +1,5 @@
+// src/components/modals/HomePage.tsx
+
 const HomePage = () => {
   return (
     <div>

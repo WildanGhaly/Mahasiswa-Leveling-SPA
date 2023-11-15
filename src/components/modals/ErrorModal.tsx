@@ -1,3 +1,5 @@
+// src/components/modals/ErrorModal.tsx
+
 import React from "react";
 import { Modal, ModalOverlay, ModalContent, ModalBody, Button } from "@chakra-ui/react";
 

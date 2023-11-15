@@ -1,9 +1,11 @@
+// src/components/cards/TopUpCard.tsx
+
 import React, { useState } from "react";
 import { Box, Image, Text, Button, Flex, Icon } from "@chakra-ui/react";
-import { FaDollarSign } from "react-icons/fa"; // Import the dollar sign icon
+import { FaDollarSign } from "react-icons/fa"; 
 import ConfirmationModal from "../modals/ConfirmationModal";
-import SuccessModal from "../modals/SuccessModal"; // Import the SuccessModal component
-import ErrorModal from "../modals/ErrorModal"; // Import the ErrorModal component
+import SuccessModal from "../modals/SuccessModal";
+import ErrorModal from "../modals/ErrorModal"; 
 import API from "../../api/api";
 
 interface TopUpOptionProps {
@@ -19,22 +21,17 @@ const TopUpOption: React.FC<TopUpOptionProps> = ({ imageSrc, amount }) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleTopUp = async () => {
-    // Handle top-up action here
-    setIsConfirmationModalOpen(true); // Open the confirmation modal
+    setIsConfirmationModalOpen(true);
   };
 
   const confirmTopUp = async () => {
-    // Handle the confirmation and complete the top-up
-    // Close the confirmation modal
     try {
-      // Make an asynchronous Axios request to your backend (assuming it's running on port 8080)
       const response = await API.post(
         "/topup",
         { amount },
         { withCredentials: true }
       );
 
-      // Check if the top-up was successful
       if (response.data.success) {
         setIsSuccessModalOpen(true);
       } else {

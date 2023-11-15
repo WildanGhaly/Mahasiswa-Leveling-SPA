@@ -1,3 +1,5 @@
+// src/components/modals/SettingsPage.tsx
+
 import React, { useState, useEffect } from "react";
 import { Container } from "@chakra-ui/react";
 import PerformanceCard from "../components/cards/PerformanceCard";

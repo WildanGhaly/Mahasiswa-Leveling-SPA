@@ -1,3 +1,5 @@
+// src/components/pages/AboutPage.tsx
+
 const AboutPage = () => {
     return (
       <div>

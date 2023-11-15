@@ -1,4 +1,5 @@
-// src/components/ProductConfirmationModal.tsx
+// src/components/modals/ProductConfirmationModal.tsx
+
 import {
   Modal,
   ModalOverlay,

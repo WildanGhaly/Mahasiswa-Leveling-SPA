@@ -1,4 +1,5 @@
-// src/components/HistoryCard.tsx
+// src/components/cards/HistoryCard.tsx
+
 import {
     Box,
     Image,

@@ -1,3 +1,5 @@
+// src/components/layout/Sidebar.tsx
+
 import React, { useState } from "react";
 import {
   Flex,

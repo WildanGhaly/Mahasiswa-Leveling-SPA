@@ -1,4 +1,5 @@
-// src/components/MerchCard.tsx
+// src/components/cards/MerchCard.tsx
+
 import {
     Box,
     Image,

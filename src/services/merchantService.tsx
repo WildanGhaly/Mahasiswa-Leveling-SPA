@@ -1,3 +1,5 @@
+// src/components/services/merchantService.tsx
+
 import API from "../api/api";
 
 export const getMerchant = async () => {

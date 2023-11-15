@@ -1,7 +1,7 @@
-// src/components/Navbar.tsx
+// src/components/layout/Navbar.tsx
 
 import { useAuth } from "../../context/AuthContext";
-import Sidebar from "./Sidebar"; // Impor komponen sidebar
+import Sidebar from "./Sidebar"; 
 import "./../../styles/Navbar.css";
 import { Link } from "react-router-dom";
 
