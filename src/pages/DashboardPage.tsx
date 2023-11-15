@@ -1,26 +1,22 @@
-// src/pages/DashboardPage.tsx
-
-import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
-import {
-  Container,
-  Input,
-  Flex,
-  SimpleGrid,
-  Select,
-  Icon,
-} from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
-import ProductCard from "../components/cards/ProductCard"; // Create this component separately
-import ReusableHeader from "../components/layout/ReusableHeader";
-import { getProducts } from "../services/productService";
 import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Container, Input, Flex, SimpleGrid, Select, Icon, Box, Button, HStack } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
+import ProductCard from "../components/cards/ProductCard";
+import ReusableHeader from "../components/layout/ReusableHeader";
+import { getProducts, getTotalProducts } from "../services/productService";
 import { Product } from "../types/product";
+import { useAuth } from "../context/AuthContext";
+import { FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const DashboardPage = () => {
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [products, setProducts] = useState<Product[]>([]);
+  const currentPage = parseInt(searchParams.get('page') || '1', 10);
+  const [totalPages, setTotalPages] = useState(1);
+  const [limit, setLimit] = useState(18);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -29,8 +25,16 @@ const DashboardPage = () => {
       getProducts().then((data) => {
         setProducts(data);
       });
+
+      getTotalProducts().then((data) => {
+        setTotalPages(Math.ceil(data[0].TotalProducts / limit));
+      });
     }
-  }, [isLoggedIn, navigate]);
+  }, [isLoggedIn, limit, navigate]);
+
+  const handlePageChange = (newPage: number) => {
+    setSearchParams({ page: newPage.toString() });
+  };
 
   return (
     <Container maxW="container.lg">
@@ -58,6 +62,68 @@ const DashboardPage = () => {
           />
         ))}
       </SimpleGrid>
+
+      <Box py={4} margin={10}>
+        <HStack justify="center">
+          {/* Tombol Halaman Pertama */}
+          <Button
+            onClick={() => handlePageChange(1)}
+            disabled={currentPage === 1}
+            boxShadow={"none"}
+            variant={"ghost"}
+          >
+            <FaAngleDoubleLeft />
+          </Button>
+
+          {/* Tombol Sebelumnya */}
+          <Button
+            onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+            disabled={currentPage === 1}
+            fontWeight="bold"
+            boxShadow={"none"}
+            variant={"ghost"}
+          >
+            <FaAngleLeft />
+          </Button>
+
+          {/* Tombol Nomor Halaman */}
+          {[...Array(totalPages).keys()].slice(Math.max(0, currentPage - 5), Math.min(currentPage + 4, totalPages)).map(page => (
+            <Button
+              key={page}
+              onClick={() => handlePageChange(page + 1)}
+              variant={page + 1 === currentPage ? "solid" : "ghost"}
+              boxShadow={page + 1 === currentPage ? "md" : "none"}
+              fontWeight={"bold"}
+              borderBlock={page + 1 === currentPage ? "1px" : "none"}
+              borderColor={"gray.400"}
+            >
+              {page + 1}
+            </Button>
+          ))}
+
+          {/* Tombol Selanjutnya */}
+          <Button
+            onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+            disabled={currentPage === totalPages}
+            fontWeight="bold"
+            boxShadow={"none"}
+            variant={"ghost"}
+          >
+            <FaAngleRight />
+          </Button>
+
+          {/* Tombol Halaman Terakhir */}
+          <Button
+            onClick={() => handlePageChange(totalPages)}
+            disabled={currentPage === totalPages}
+            boxShadow={"none"}
+            variant={"ghost"}
+          >
+            <FaAngleDoubleRight />
+          </Button>
+        </HStack>
+      </Box>
+
     </Container>
   );
 };
