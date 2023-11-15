@@ -30,7 +30,7 @@ const ProductDetailPage = () => {
                 setProduct(data);
             });
         } else {
-            console.error('Product ID is undefined');
+            console.error('Product ID is undefined'); 
         }
     }, [id]);
 
@@ -117,6 +117,7 @@ const ProductDetailPage = () => {
             onClose={onClose}
             onSuccess={handleSuccess}
             onError={handleError}
+            productid={id == undefined ? '' : id}
             productName={product[0].ProductName}
             quantity={quantity}
             price={product[0].Price}

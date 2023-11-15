@@ -11,12 +11,14 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
+import { buyProduct } from '../services/buyProductService';
 
 interface ProductConfirmationModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSuccess: () => void;
   onError: () => void;
+  productid: string;
   productName: string;
   quantity: number;
   price: number;
@@ -27,6 +29,7 @@ const ProductConfirmationModal: React.FC<ProductConfirmationModalProps> = ({
   onClose,
   onSuccess,
   onError,
+  productid,
   productName,
   quantity,
   price,
@@ -34,11 +37,13 @@ const ProductConfirmationModal: React.FC<ProductConfirmationModalProps> = ({
   const { isOpen: isSuccessModalOpen, onOpen: openSuccessModal, onClose: closeSuccessModal } = useDisclosure();
   const { isOpen: isErrorModalOpen, onOpen: openErrorModal, onClose: closeErrorModal } = useDisclosure();
 
-  const handleBuyConfirmation = () => {
+  const handleBuyConfirmation = async () => {
 
-    const isBuySuccessful = Math.random() < 0.5;
+    const response = buyProduct(productid, price, quantity);
 
-    if (isBuySuccessful) {
+    const isBuySuccessful = response;
+
+    if (await isBuySuccessful) {
       openSuccessModal();
       onSuccess();
     } else {
