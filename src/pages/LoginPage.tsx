@@ -1,7 +1,8 @@
+// src/components/modals/LoginPage.tsx
+
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './../context/AuthContext';
-import axios from 'axios';
 import {
   Box,
   Input,
@@ -16,6 +17,7 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { AtSignIcon, LockIcon } from '@chakra-ui/icons';
+import API from '../api/api';
 
 const ChakraLink = chakra(Link);
 
@@ -30,7 +32,7 @@ const LoginPage = () => {
     const handleApiLogin = async (username: string, password: string) => {
         try {
             console.log('Logging in...');
-            const response = await axios.post('http://localhost:8080/auth/login', {
+            const response = await API.post('/auth/login', {
                 username,
                 password
             }, { withCredentials: true });

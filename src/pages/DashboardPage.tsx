@@ -1,6 +1,7 @@
 // src/pages/DashboardPage.tsx
-import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import {
   Container,
   Input,
@@ -8,13 +9,13 @@ import {
   SimpleGrid,
   Select,
   Icon,
-} from '@chakra-ui/react';
-import { SearchIcon } from '@chakra-ui/icons';
-import ProductCard from '../components/ProductCard'; // Create this component separately
-import ReusableHeader from '../components/ReusableHeader';
-import { getProducts } from '../services/productService';
-import { useEffect, useState } from 'react';
-import { Product } from '../types/product';
+} from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
+import ProductCard from "../components/cards/ProductCard"; // Create this component separately
+import ReusableHeader from "../components/layout/ReusableHeader";
+import { getProducts } from "../services/productService";
+import { useEffect, useState } from "react";
+import { Product } from "../types/product";
 
 const DashboardPage = () => {
   const { isLoggedIn } = useAuth();
@@ -23,14 +24,14 @@ const DashboardPage = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      navigate('/login');
+      navigate("/login");
     } else {
-      getProducts().then(data => {
+      getProducts().then((data) => {
         setProducts(data);
       });
     }
   }, [isLoggedIn, navigate]);
-  
+
   return (
     <Container maxW="container.lg">
       <ReusableHeader headingName="Dashboard" />
@@ -46,7 +47,7 @@ const DashboardPage = () => {
       </Flex>
       {/* Product Listings */}
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={4}>
-        {products.map(product => (
+        {products.map((product) => (
           <ProductCard
             key={product.ProductID}
             id={product.ProductID}

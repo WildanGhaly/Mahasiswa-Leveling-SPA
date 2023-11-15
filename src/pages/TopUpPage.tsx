@@ -1,9 +1,11 @@
+// src/components/modals/TopUpPage.tsx
+
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Container, SimpleGrid } from "@chakra-ui/react";
-import TopUpOption from "./../components/TopUpOption";
-import CustomAmountTopUp from "./../components/CustomAmountTopUp";
-import ReusableHeader from "../components/ReusableHeader";
+import TopUpOption from "../components/cards/TopUpCard";
+import CustomAmountTopUp from "../components/modals/CustomAmountTopUpModal";
+import ReusableHeader from "../components/layout/ReusableHeader";
 
 const TopUpPage = () => {
   const { isLoggedIn } = useAuth();

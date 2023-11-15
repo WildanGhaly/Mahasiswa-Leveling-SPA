@@ -1,32 +1,27 @@
-// src/components/HistoryCard.tsx
+// src/components/cards/MerchCard.tsx
+
 import {
     Box,
     Image,
     Badge,
     Text,
     Flex,
-    IconButton,
   } from '@chakra-ui/react';
-  import { CalendarIcon } from '@chakra-ui/icons';
-import { Link } from 'react-router-dom';
   
-  interface HistoryCardProps {
+  interface MerchCardProps {
+    id: string;
     name: string;
     quantity: string;
-    date: string;
     imageSrc: string;
-    id: string;
   }
   
-  const HistoryCard: React.FC<HistoryCardProps> = ({
+  const MerchCard: React.FC<MerchCardProps> = ({
+    id,
     name,
     quantity,
-    date,
     imageSrc,
-    id,
   }) => {
     return (
-        <Link to={`/History/${id}`}>
       <Box
         borderWidth="1px"
         borderRadius="lg"
@@ -49,21 +44,15 @@ import { Link } from 'react-router-dom';
         </Box>
         <Box p={4}>
           <Text fontWeight="semibold" fontSize="lg">
-            {quantity} {name}
+            {id} {name}
           </Text>
           <Flex align="center" justify="flex-end">
-            <IconButton
-              aria-label="Date"
-              icon={<CalendarIcon />}
-              variant="ghost"
-            />
-            <Badge colorScheme="green">{date}</Badge>
+            <Badge colorScheme="green">Obtained {quantity}</Badge>
           </Flex>
         </Box>
       </Box>
-      </Link>
     );
   };
   
-  export default HistoryCard;
+  export default MerchCard;
   

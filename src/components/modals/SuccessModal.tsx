@@ -1,20 +1,21 @@
+// src/components/modals/SuccessModal.tsx
+
 import React from "react";
 import { Modal, ModalOverlay, ModalContent, ModalBody, Button } from "@chakra-ui/react";
 
-interface ErrorModalProps {
+interface SuccessModalProps {
   isOpen: boolean;
   onClose: () => void;
-  errorMessage: string;
 }
 
-const ErrorModal: React.FC<ErrorModalProps> = ({ isOpen, onClose, errorMessage }) => {
+const SuccessModal: React.FC<SuccessModalProps> = ({ isOpen, onClose }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalBody>
-          <p>{errorMessage}</p>
-          <Button colorScheme="red" onClick={onClose}>
+          <p>Top-up successful!</p>
+          <Button colorScheme="green" onClick={onClose}>
             Close
           </Button>
         </ModalBody>
@@ -23,4 +24,4 @@ const ErrorModal: React.FC<ErrorModalProps> = ({ isOpen, onClose, errorMessage }
   );
 };
 
-export default ErrorModal;
+export default SuccessModal;

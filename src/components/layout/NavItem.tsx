@@ -1,3 +1,5 @@
+// src/components/layout/NavItem.tsx
+
 import React from 'react';
 import {
     Flex,
@@ -9,7 +11,6 @@ import {
 } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 
-// Define a type for the component's props
 interface NavItemProps {
     icon: IconType;
     title: string;

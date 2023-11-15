@@ -1,12 +1,14 @@
+// src/components/modals/RegisterPage.tsx
+
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './../context/AuthContext';
-import axios from 'axios';
 import {
     Box, Input, Button, FormControl, FormLabel, InputGroup, InputLeftElement,
     Text, VStack, chakra, Flex
 } from '@chakra-ui/react';
 import { AtSignIcon, EmailIcon, LockIcon } from '@chakra-ui/icons';
+import API from '../api/api';
 
 const ChakraLink = chakra(Link);
 
@@ -21,7 +23,7 @@ const RegisterPage = () => {
     const handleApiRegister = async (username: string, email: string, password: string) => {
         try {
             console.log('Registering...');
-            const response = await axios.post('http://localhost:8080/auth/register', {
+            const response = await API.post('/auth/register', {
                 username,
                 email,
                 password

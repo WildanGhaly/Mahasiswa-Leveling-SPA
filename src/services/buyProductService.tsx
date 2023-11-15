@@ -1,11 +1,11 @@
-import axios from "axios";
+// src/components/services/buyProductService.tsx
 
-const BASE_URL = "http://localhost:8080";
+import API from "../api/api";
 
 export const buyProduct = async (productid: string, price: number, quantity: number) => {
     try {
-        const response = await axios.post(
-        `${BASE_URL}/buy`,
+        const response = await API.post(
+        `/buy`,
         {
             productid,
             quantity,

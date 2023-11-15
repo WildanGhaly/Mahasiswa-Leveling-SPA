@@ -1,4 +1,5 @@
-// src/components/ProductCard.tsx
+// src/components/cards/ProductCard.tsx
+
 import {
   Box,
   Image,

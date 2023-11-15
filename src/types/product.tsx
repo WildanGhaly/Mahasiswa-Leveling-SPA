@@ -1,3 +1,5 @@
+// src/components/types/product.tsx
+
 export interface Product {
     ProductID: string;
     ProductName: string;
