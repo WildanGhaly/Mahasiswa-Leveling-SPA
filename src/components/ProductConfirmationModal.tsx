@@ -36,7 +36,7 @@ const ProductConfirmationModal: React.FC<ProductConfirmationModalProps> = ({
 
   const handleBuyConfirmation = () => {
 
-    const isBuySuccessful = Math.random() < 0.8;
+    const isBuySuccessful = Math.random() < 0.5;
 
     if (isBuySuccessful) {
       openSuccessModal();
@@ -74,6 +74,7 @@ const ProductConfirmationModal: React.FC<ProductConfirmationModalProps> = ({
           <ModalCloseButton />
           <ModalBody>
             <Text>
+            <FaCheckCircle size={40} color="green" style={{ marginBottom: '1rem' }} />
               Purchase successful!
             </Text>
           </ModalBody>
@@ -84,10 +85,11 @@ const ProductConfirmationModal: React.FC<ProductConfirmationModalProps> = ({
       <Modal isOpen={isErrorModalOpen} onClose={closeErrorModal} size="sm">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Error</ModalHeader>
+          <ModalHeader >Error</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Text>
+            <FaTimesCircle size={40} color="red" style={{ marginBottom: '1rem' }} />
               Purchase failed. Please try again.
             </Text>
           </ModalBody>
