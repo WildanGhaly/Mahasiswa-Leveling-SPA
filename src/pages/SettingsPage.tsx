@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Container } from "@chakra-ui/react";
 import PerformanceCard from "../components/PerformanceCard";
 import UserCard from "../components/UserCard";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import ReusableHeader from "../components/ReusableHeader";
+import API from '../api/api';
 
 const SettingsPage: React.FC = () => {
     const { isLoggedIn } = useAuth();
@@ -21,7 +21,7 @@ const SettingsPage: React.FC = () => {
         if (!isLoggedIn) {
             navigate('/login');
         } else {
-            axios.get('http://localhost:8080/user/data', { withCredentials: true })
+            API.get('/user/data', { withCredentials: true })
                 .then(response => {
                     setUserData(response.data);
                 })

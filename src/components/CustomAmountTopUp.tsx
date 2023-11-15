@@ -12,9 +12,9 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import ConfirmationModal from "./ConfirmationModal"; // Import the ConfirmationModal component
-import axios from "axios";
 import ErrorModal from "./ErrorModal";
 import SuccessModal from "./SuccessModal";
+import API from "../api/api";
 
 const CustomAmountTopUp: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,7 +43,7 @@ const CustomAmountTopUp: React.FC = () => {
     try {
       // Make an asynchronous Axios request to your backend (assuming it's running on port 8080)
       console.log("HSAdhjawda", amount);
-      const response = await axios.post("http://localhost:8080/topup", { amount }, { withCredentials: true});
+      const response = await API.post("/topup", { amount }, { withCredentials: true});
 
       // Check if the top-up was successful
       if (response.data.success) {

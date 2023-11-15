@@ -1,10 +1,8 @@
-import axios from "axios";
-
-const BASE_URL = "http://localhost:8080";
+import API from "../api/api";
 
 export const getHistory = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}/history`, {
+    const response = await API.get(`/history`, {
       withCredentials: true,
     });
     return response.data;

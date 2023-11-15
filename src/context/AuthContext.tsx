@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import axios from 'axios';
+import API from '../api/api';
 
 interface AuthContextType {
     isLoggedIn: boolean;
@@ -31,7 +31,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         // Cek apakah user sudah login dengan mengirim request ke backend
         const checkLoginStatus = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/user/check-status', { withCredentials: true });
+                const response = await API.get('/user/check-status', { withCredentials: true });
                 console.log('Login status', response);
                 setIsLoggedIn(response.data.isLoggedIn);
                 setUsername(response.data.username);
@@ -56,7 +56,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const logout = async () => {
         try {
             console.log('Logging out...');
-            const response = await axios.delete('http://localhost:8080/logout', { withCredentials: true });
+            const response = await API.delete('http://localhost:8080/logout', { withCredentials: true });
             if (response.status === 204) {
                 setIsLoggedIn(false);
                 setUsername('');

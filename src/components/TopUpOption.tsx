@@ -9,9 +9,9 @@ import {
 } from "@chakra-ui/react";
 import { FaDollarSign } from "react-icons/fa"; // Import the dollar sign icon
 import ConfirmationModal from "./ConfirmationModal";
-import axios from "axios";
 import SuccessModal from "./SuccessModal"; // Import the SuccessModal component
 import ErrorModal from "./ErrorModal"; // Import the ErrorModal component
+import API from "../api/api";
 
 interface TopUpOptionProps {
   imageSrc: string;
@@ -34,7 +34,7 @@ const TopUpOption: React.FC<TopUpOptionProps> = ({ imageSrc, amount }) => {
     // Close the confirmation modal
     try {
       // Make an asynchronous Axios request to your backend (assuming it's running on port 8080)
-      const response = await axios.post("http://localhost:8080/topup", { amount }, { withCredentials: true});
+      const response = await API.post("/topup", { amount }, { withCredentials: true});
 
       // Check if the top-up was successful
       if (response.data.success) {
