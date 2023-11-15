@@ -9,6 +9,7 @@ import HistoryPage from './pages/HistoryPage';
 import TopUpPage from './pages/TopUpPage';
 import MerchantPage from './pages/MerchantPage';
 import SettingsPage from './pages/SettingsPage';
+import ProductDetailPage from './pages/ProductDetailPage';
 
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ChakraProvider } from '@chakra-ui/react';
@@ -40,6 +41,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/dashboard/product/:id" element={<ProductDetailPage />} />
                 <Route path="/history" element={<HistoryPage />} />
                 <Route path="/topup" element={<TopUpPage />} />
                 <Route path="/merchant" element={<MerchantPage />} />
