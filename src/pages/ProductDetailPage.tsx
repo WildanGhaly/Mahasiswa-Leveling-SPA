@@ -9,13 +9,29 @@ import {
   Text,
   Input,
   Button,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { FaMinus, FaPlus, FaShoppingCart } from 'react-icons/fa';
 import ReusableHeader from '../components/ReusableHeader';
+import ProductConfirmationModal from '../components/ProductConfirmationModal';
 
 const ProductDetailPage = () => {
   const { id } = useParams();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isPurchaseSuccessful, setIsPurchaseSuccessful] = useState<boolean>(false);
+
+  const handleBuyClick = () => {
+    onOpen();
+  };
+
+  const handleSuccess = () => {
+    setIsPurchaseSuccessful(true);
+  };
+
+  const handleError = () => {
+    setIsPurchaseSuccessful(false);
+  };
 
   const dummyProduct = {
     ProductID: id,
@@ -27,10 +43,6 @@ const ProductDetailPage = () => {
   };
 
   const [quantity, setQuantity] = useState(1);
-
-  const handleBuyClick = () => {
-    console.log(`Beli ${quantity} produk dengan ID ${id}`);
-  };
 
     const handleDecrease = () => {
         setQuantity((prev) => Math.max(1, prev - 1));
@@ -96,6 +108,16 @@ const ProductDetailPage = () => {
           </Flex>
         </Box>
       </Flex>
+
+      <ProductConfirmationModal
+        isOpen={isOpen}
+        onClose={onClose}
+        onSuccess={handleSuccess}
+        onError={handleError}
+        productName={dummyProduct.ProductName}
+        quantity={quantity}
+        price={dummyProduct.Price}
+      />
     </Container>
   );
 };
