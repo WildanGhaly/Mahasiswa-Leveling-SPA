@@ -9,9 +9,9 @@ import {
   Text,
   Button,
   useDisclosure,
-} from '@chakra-ui/react';
-import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
-import { buyProduct } from '../services/buyProductService';
+} from "@chakra-ui/react";
+import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { buyProduct } from "../../services/buyProductService";
 
 interface ProductConfirmationModalProps {
   isOpen: boolean;
@@ -34,11 +34,18 @@ const ProductConfirmationModal: React.FC<ProductConfirmationModalProps> = ({
   quantity,
   price,
 }) => {
-  const { isOpen: isSuccessModalOpen, onOpen: openSuccessModal, onClose: closeSuccessModal } = useDisclosure();
-  const { isOpen: isErrorModalOpen, onOpen: openErrorModal, onClose: closeErrorModal } = useDisclosure();
+  const {
+    isOpen: isSuccessModalOpen,
+    onOpen: openSuccessModal,
+    onClose: closeSuccessModal,
+  } = useDisclosure();
+  const {
+    isOpen: isErrorModalOpen,
+    onOpen: openErrorModal,
+    onClose: closeErrorModal,
+  } = useDisclosure();
 
   const handleBuyConfirmation = async () => {
-
     const response = buyProduct(productid, price, quantity);
 
     const isBuySuccessful = response;
@@ -62,11 +69,20 @@ const ProductConfirmationModal: React.FC<ProductConfirmationModalProps> = ({
           <ModalHeader>Confirm Purchase</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text>{`Are you sure you want to buy ${quantity} ${productName}(s) for $${quantity * price}?`}</Text>
-            <Button colorScheme="teal" mt={4} mr={2} onClick={handleBuyConfirmation}>
+            <Text>{`Are you sure you want to buy ${quantity} ${productName}(s) for $${
+              quantity * price
+            }?`}</Text>
+            <Button
+              colorScheme="teal"
+              mt={4}
+              mr={2}
+              onClick={handleBuyConfirmation}
+            >
               Confirm
             </Button>
-            <Button onClick={onClose} mt={4} mr={2}>Cancel</Button>
+            <Button onClick={onClose} mt={4} mr={2}>
+              Cancel
+            </Button>
           </ModalBody>
         </ModalContent>
       </Modal>
@@ -79,7 +95,11 @@ const ProductConfirmationModal: React.FC<ProductConfirmationModalProps> = ({
           <ModalCloseButton />
           <ModalBody>
             <Text>
-            <FaCheckCircle size={40} color="green" style={{ marginBottom: '1rem' }} />
+              <FaCheckCircle
+                size={40}
+                color="green"
+                style={{ marginBottom: "1rem" }}
+              />
               Purchase successful!
             </Text>
           </ModalBody>
@@ -90,11 +110,15 @@ const ProductConfirmationModal: React.FC<ProductConfirmationModalProps> = ({
       <Modal isOpen={isErrorModalOpen} onClose={closeErrorModal} size="sm">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader >Error</ModalHeader>
+          <ModalHeader>Error</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Text>
-            <FaTimesCircle size={40} color="red" style={{ marginBottom: '1rem' }} />
+              <FaTimesCircle
+                size={40}
+                color="red"
+                style={{ marginBottom: "1rem" }}
+              />
               Purchase failed. Please try again.
             </Text>
           </ModalBody>
