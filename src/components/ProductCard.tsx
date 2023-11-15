@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
+
 interface ProductCardProps {
   id: string;
   stock: string;
@@ -24,7 +25,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   imageSrc,
 }) => {
   return (
-    <Link to={`/Product/${id}`}>
+    <Link to={`/Dashboard/Product/${id}`}>
     <Box
       borderWidth="1px"
       borderRadius="lg"
