@@ -42,7 +42,7 @@ const DashboardPage = () => {
   }, [currentPage, isLoggedIn, limit, navigate, searchValue]);
 
   const handlePageChange = (newPage: number) => {
-    setSearchParams({ page: newPage.toString() });
+    setSearchParams({ page: newPage.toString(), search: searchValue });
   };
 
   return (
