@@ -15,6 +15,7 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import { ChakraProvider } from "@chakra-ui/react";
 import "./App.css";
 import { ReactNode } from "react";
+import { MoneyProvider } from "./context/MoneyContext";
 
 interface AppContainerProps {
   children: ReactNode;
@@ -31,6 +32,7 @@ function App() {
   return (
     <ChakraProvider>
       <AuthProvider>
+      <MoneyProvider>
         <BrowserRouter>
           <AppContainer>
             <Navbar />
@@ -53,6 +55,7 @@ function App() {
             </div>
           </AppContainer>
         </BrowserRouter>
+      </MoneyProvider>
       </AuthProvider>
     </ChakraProvider>
   );

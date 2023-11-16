@@ -1,10 +1,11 @@
 // src/components/layout/ReusableHeader.tsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { Flex, Heading, Badge, Spacer, Button, Icon } from "@chakra-ui/react";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { getMoney } from "../../services/moneyService";
 import { FiRefreshCw } from "react-icons/fi";
+import { useMoney } from "../../context/MoneyContext";
 
 interface ReusableHeaderProps {
   headingName: string;
@@ -13,14 +14,11 @@ interface ReusableHeaderProps {
 const ReusableHeader: React.FC<ReusableHeaderProps> = ({ headingName }) => {
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
-  const [moneyData, setMoneyData] = useState({ points: 0, money: 0 });
+  const { moneyData, setMoneyData } = useMoney();
 
   useEffect(() => {
     if (isLoggedIn) {
       // loadMoneyData();
-      getMoney().then((data) => {
-        setMoneyData(data[0]);
-      });
     } else {
       navigate("/login");
     }
