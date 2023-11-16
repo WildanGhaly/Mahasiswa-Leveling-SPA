@@ -17,7 +17,6 @@ const SettingsPage: React.FC = () => {
     username: "",
     name: "",
     email: "",
-    points: 0,
   });
 
   useEffect(() => {
