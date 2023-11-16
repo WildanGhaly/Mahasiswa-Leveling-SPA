@@ -29,7 +29,7 @@ const Navbar = () => {
 
     checkLoginStatus();
     console.log("Current URL", location.pathname);
-  }, [location.pathname]); // Bergantung pada perubahan pathname
+  }, [auth, location.pathname]);
 
   if (auth.isLoggedIn) {
     return <Sidebar />;

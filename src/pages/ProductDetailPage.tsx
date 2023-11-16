@@ -17,6 +17,8 @@ import { FaMinus, FaPlus, FaShoppingCart } from "react-icons/fa";
 import ReusableHeader from "../components/layout/ReusableHeader";
 import ProductConfirmationModal from "../components/modals/ProductConfirmationModal";
 import { getProductByID } from "../services/productService";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 interface Product {
   ProductName: string;
@@ -31,8 +33,15 @@ const ProductDetailPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [product, setProduct] = useState<Product[]>([]);
   const [quantity, setQuantity] = useState(1);
-  const [isPurchaseSuccessful, setIsPurchaseSuccessful] =
-    useState<boolean>(false);
+  const [isPurchaseSuccessful, setIsPurchaseSuccessful] = useState<boolean>(false);
+  const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/login");
+    }
+  }, [isLoggedIn, navigate]);
 
   useEffect(() => {
     if (id) {
