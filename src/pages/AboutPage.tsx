@@ -26,7 +26,7 @@ const AboutPage = () => {
             <Image 
               borderRadius='full'
               boxSize='150px'
-              src='public/image/1.jpg' 
+              src='/image/1.jpg' 
               alt='Company Logo'
               m='auto'
             />
