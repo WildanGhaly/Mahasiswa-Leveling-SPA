@@ -31,13 +31,12 @@ const RegisterPage = () => {
                 password,
                 code,
             }, { withCredentials: true });
-
-            if (response.status !== 200) {
+            
+            if (response.status !== 200 || !response.data.success) {
                 throw new Error('Register failed');
             }
 
             login(response.data.username);
-
             console.log('Registered!', response.data);
             nav('/dashboard');
         } catch (error) {
