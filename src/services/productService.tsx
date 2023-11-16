@@ -20,10 +20,16 @@ export const getProductByID = async (id: string) => {
   }
 }
 
-export const getTotalProducts = async () => {
+export const getTotalProducts = async (search: string) => {
   console.log('getTotalProducts');
+
+  let api = `/products/count`;
+  if (search) {
+    api += `/search/${search}`;
+  }
+
   try {
-    const response = await API.get(`/products/count`);
+    const response = await API.get(api);
     console.log('response.data', response.data[0]);
     return response.data;
   } catch (error) {

@@ -31,7 +31,7 @@ const DashboardPage = () => {
       navigate("/login");
     } else {
 
-      getTotalProducts().then((data) => {
+      getTotalProducts(searchValue).then((data) => {
         setTotalPages(Math.ceil(data[0].TotalProducts / limit));
       });
 
