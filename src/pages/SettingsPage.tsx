@@ -8,6 +8,7 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import ReusableHeader from "../components/layout/ReusableHeader";
 import API from "../api/api";
+import LogoutButton from "../components/modals/Logout";
 
 const SettingsPage: React.FC = () => {
   const { isLoggedIn } = useAuth();
@@ -50,6 +51,7 @@ const SettingsPage: React.FC = () => {
       <ReusableHeader headingName="Settings" />
       <UserCard {...userData} onToggleEmailNotify={handleToggleEmailNotify} />
       <PerformanceCard {...performanceData} />
+      <LogoutButton />
     </Container>
   );
 };

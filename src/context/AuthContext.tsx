@@ -58,7 +58,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const logout = async () => {
         try {
             console.log('Logging out...');
-            const response = await API.delete('http://localhost:8080/logout', { withCredentials: true });
+            const response = await API.delete('/auth/logout', { withCredentials: true });
             if (response.status === 204) {
                 setIsLoggedIn(false);
                 setUsername('');
