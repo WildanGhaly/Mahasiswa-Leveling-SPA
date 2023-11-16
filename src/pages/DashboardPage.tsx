@@ -18,6 +18,12 @@ const DashboardPage = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [limit, setLimit] = useState(18);
 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setSearchParams({ search: value });
+    console.log(value);
+  };
+
   useEffect(() => {
     if (!isLoggedIn) {
       navigate("/login");
@@ -42,9 +48,13 @@ const DashboardPage = () => {
       <ReusableHeader headingName="Dashboard" />
       <Flex align="center" justify="space-between" py={4}>
         <Flex mr={4} align="center" w="70%">
-          <Icon as={SearchIcon} mr={2} />
-          <Input placeholder="Search products" />
-        </Flex>
+        <Icon as={SearchIcon} mr={2} />
+        <Input
+          placeholder="Search products"
+          value={searchParams.get('search') || ''}
+          onChange={handleSearchChange}
+        />
+      </Flex>
         <Select placeholder="Select filter" w="20%">
           <option value="option1">Option 1</option>
           <option value="option2">Option 2</option>
