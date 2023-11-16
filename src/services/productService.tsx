@@ -32,9 +32,13 @@ export const getTotalProducts = async () => {
 }
 
 export const getProductByPage = async (page: number, limit: number, search: string) => {
-  console.log('getProductByPage', page, limit);
+  console.log('getProductByPage', page, limit, search);
+  let api = `/products/page/${page}/limit/${limit}`;
+  if (search) {
+    api += `/search/${search}`;
+  }
   try {
-    const response = await API.get(`/products/page/${page}/limit/${limit}/search/${search}`);
+    const response = await API.get(api);
     return response.data;
   } catch (error) {
     console.error('Error fetching products by page:', error);
