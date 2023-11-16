@@ -18,6 +18,7 @@ const DashboardPage = () => {
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
   const [totalPages, setTotalPages] = useState(1);
   const [limit, setLimit] = useState(18);
+  const [filter, setFilter] = useState('');
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -26,20 +27,25 @@ const DashboardPage = () => {
     console.log(value);
   };
 
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedFilter = e.target.value;
+    setFilter(selectedFilter);
+  };
+
   useEffect(() => {
     if (!isLoggedIn) {
       navigate("/login");
     } else {
 
-      getTotalProducts(searchValue).then((data) => {
+      getTotalProducts(searchValue, filter).then((data) => {
         setTotalPages(Math.ceil(data[0].TotalProducts / limit));
       });
 
-      getProductByPage(currentPage, limit, searchValue).then((data) => {
+      getProductByPage(currentPage, limit, searchValue, filter).then((data) => {
         setProducts(data);
       });
     }
-  }, [currentPage, isLoggedIn, limit, navigate, searchValue]);
+  }, [currentPage, filter, isLoggedIn, limit, navigate, searchValue]);
 
   const handlePageChange = (newPage: number) => {
     setSearchParams({ page: newPage.toString(), search: searchValue });
@@ -57,9 +63,15 @@ const DashboardPage = () => {
           onChange={handleSearchChange}
         />
       </Flex>
-        <Select placeholder="Select filter" w="20%">
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
+        <Select
+          placeholder="Select filter"
+          w="20%"
+          value={filter}
+          onChange={handleFilterChange}
+        >
+          <option value="">All</option>
+          <option value="Available">Available</option>
+          <option value="Not Available">Not Available</option>
         </Select>
       </Flex>
       {/* Product Listings */}
