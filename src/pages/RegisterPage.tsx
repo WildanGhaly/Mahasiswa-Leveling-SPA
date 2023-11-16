@@ -8,6 +8,7 @@ import {
     Text, VStack, chakra, Flex
 } from '@chakra-ui/react';
 import { AtSignIcon, EmailIcon, LockIcon } from '@chakra-ui/icons';
+import { FaCode } from "react-icons/fa";
 import API from '../api/api';
 
 const ChakraLink = chakra(Link);
@@ -19,14 +20,16 @@ const RegisterPage = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [code, setCode] = useState('');
 
-    const handleApiRegister = async (username: string, email: string, password: string) => {
+    const handleApiRegister = async (username: string, email: string, password: string, code: string) => {
         try {
             console.log('Registering...');
             const response = await API.post('/auth/register', {
                 username,
                 email,
-                password
+                password,
+                code,
             }, { withCredentials: true });
 
             if (response.status !== 200) {
@@ -45,7 +48,7 @@ const RegisterPage = () => {
     const handleRegister = (e: React.FormEvent) => {
         e.preventDefault();
         console.log('Registering...FE');
-        handleApiRegister(username, email, password);
+        handleApiRegister(username, email, password, code);
     };
     
     return (
@@ -55,6 +58,21 @@ const RegisterPage = () => {
                     <VStack spacing={4} align='stretch'>
                         <Text fontSize='2xl'>Register</Text>
                         <form onSubmit={handleRegister}>
+
+                            <FormControl id='kode' isRequired>
+                                <FormLabel>Kode:</FormLabel>
+                                <InputGroup>
+                                    <InputLeftElement pointerEvents='none' children={<FaCode color='black' />} />
+                                    <Input 
+                                        type='text'
+                                        value={code} 
+                                        onChange={(e) => setCode(e.target.value)}
+                                        borderColor='black'
+                                        color='black'
+                                    />
+                                </InputGroup>
+                            </FormControl>
+
                             <FormControl id='username' isRequired>
                                 <FormLabel>Username:</FormLabel>
                                 <InputGroup>
