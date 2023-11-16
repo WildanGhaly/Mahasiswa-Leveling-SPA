@@ -20,10 +20,22 @@ export const getProductByID = async (id: string) => {
   }
 }
 
-export const getTotalProducts = async () => {
+export const getTotalProducts = async (search: string, filter: string) => {
   console.log('getTotalProducts');
+
+  let api = `/products/count`;
+  if (search) {
+    api += `/search/${search}`;
+  }
+
+  if (filter) {
+    api += `/filter/${filter}`;
+  }
+
+  console.log('api', api);
+
   try {
-    const response = await API.get(`/products/count`);
+    const response = await API.get(api);
     console.log('response.data', response.data[0]);
     return response.data;
   } catch (error) {
@@ -31,3 +43,31 @@ export const getTotalProducts = async () => {
   }
 }
 
+export const getProductByPage = async (page: number, limit: number, search: string, filter: string) => {
+  console.log('getProductByPage', page, limit, search);
+  let api = `/products/page/${page}/limit/${limit}`;
+  if (search) {
+    api += `/search/${search}`;
+  }
+  if (filter) {
+    api += `/filter/${filter}`;
+  }
+
+  console.log('api', api);
+  try {
+    const response = await API.get(api);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching products by page:', error);
+  }
+}
+
+export const getProductWithSearch = async (search: string) => {
+  console.log('getProductWithSearch', search);
+  try {
+    const response = await API.get(`/products/search/${search}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching products with search:', error);
+  }
+}

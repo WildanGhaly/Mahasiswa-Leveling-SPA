@@ -4,7 +4,7 @@ import { Container, Input, Flex, SimpleGrid, Select, Icon, Box, Button, HStack }
 import { SearchIcon } from "@chakra-ui/icons";
 import ProductCard from "../components/cards/ProductCard";
 import ReusableHeader from "../components/layout/ReusableHeader";
-import { getProducts, getTotalProducts } from "../services/productService";
+import { getTotalProducts, getProductByPage } from "../services/productService";
 import { Product } from "../types/product";
 import { useAuth } from "../context/AuthContext";
 import { FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight } from "react-icons/fa";
@@ -13,27 +13,42 @@ const DashboardPage = () => {
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [searchValue, setSearchValue] = useState(searchParams.get('search') || '');
   const [products, setProducts] = useState<Product[]>([]);
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
   const [totalPages, setTotalPages] = useState(1);
   const [limit, setLimit] = useState(18);
+  const [filter, setFilter] = useState('');
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setSearchParams({ search: value });
+    setSearchValue(value);
+    console.log(value);
+  };
+
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedFilter = e.target.value;
+    setFilter(selectedFilter);
+  };
 
   useEffect(() => {
     if (!isLoggedIn) {
       navigate("/login");
     } else {
-      getProducts().then((data) => {
-        setProducts(data);
-      });
 
-      getTotalProducts().then((data) => {
+      getTotalProducts(searchValue, filter).then((data) => {
         setTotalPages(Math.ceil(data[0].TotalProducts / limit));
       });
+
+      getProductByPage(currentPage, limit, searchValue, filter).then((data) => {
+        setProducts(data);
+      });
     }
-  }, [isLoggedIn, limit, navigate]);
+  }, [currentPage, filter, isLoggedIn, limit, navigate, searchValue]);
 
   const handlePageChange = (newPage: number) => {
-    setSearchParams({ page: newPage.toString() });
+    setSearchParams({ page: newPage.toString(), search: searchValue });
   };
 
   return (
@@ -41,12 +56,22 @@ const DashboardPage = () => {
       <ReusableHeader headingName="Dashboard" />
       <Flex align="center" justify="space-between" py={4}>
         <Flex mr={4} align="center" w="70%">
-          <Icon as={SearchIcon} mr={2} />
-          <Input placeholder="Search products" />
-        </Flex>
-        <Select placeholder="Select filter" w="20%">
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
+        <Icon as={SearchIcon} mr={2} />
+        <Input
+          placeholder="Search products"
+          value={searchParams.get('search') || ''}
+          onChange={handleSearchChange}
+        />
+      </Flex>
+        <Select
+          placeholder="Select filter"
+          w="20%"
+          value={filter}
+          onChange={handleFilterChange}
+        >
+          <option value="">All</option>
+          <option value="Available">Available</option>
+          <option value="Not Available">Not Available</option>
         </Select>
       </Flex>
       {/* Product Listings */}
