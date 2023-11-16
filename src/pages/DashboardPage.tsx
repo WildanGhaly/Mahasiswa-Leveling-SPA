@@ -4,7 +4,7 @@ import { Container, Input, Flex, SimpleGrid, Select, Icon, Box, Button, HStack }
 import { SearchIcon } from "@chakra-ui/icons";
 import ProductCard from "../components/cards/ProductCard";
 import ReusableHeader from "../components/layout/ReusableHeader";
-import { getProducts, getTotalProducts } from "../services/productService";
+import { getTotalProducts, getProductByPage } from "../services/productService";
 import { Product } from "../types/product";
 import { useAuth } from "../context/AuthContext";
 import { FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight } from "react-icons/fa";
@@ -22,15 +22,16 @@ const DashboardPage = () => {
     if (!isLoggedIn) {
       navigate("/login");
     } else {
-      getProducts().then((data) => {
-        setProducts(data);
-      });
 
       getTotalProducts().then((data) => {
         setTotalPages(Math.ceil(data[0].TotalProducts / limit));
       });
+
+      getProductByPage(currentPage, limit).then((data) => {
+        setProducts(data);
+      });
     }
-  }, [isLoggedIn, limit, navigate]);
+  }, [currentPage, isLoggedIn, limit, navigate]);
 
   const handlePageChange = (newPage: number) => {
     setSearchParams({ page: newPage.toString() });
