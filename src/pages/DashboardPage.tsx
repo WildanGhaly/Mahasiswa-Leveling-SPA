@@ -13,6 +13,7 @@ const DashboardPage = () => {
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+  const [searchValue, setSearchValue] = useState(searchParams.get('search') || '');
   const [products, setProducts] = useState<Product[]>([]);
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
   const [totalPages, setTotalPages] = useState(1);
@@ -21,6 +22,7 @@ const DashboardPage = () => {
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setSearchParams({ search: value });
+    setSearchValue(value);
     console.log(value);
   };
 
@@ -33,11 +35,11 @@ const DashboardPage = () => {
         setTotalPages(Math.ceil(data[0].TotalProducts / limit));
       });
 
-      getProductByPage(currentPage, limit).then((data) => {
+      getProductByPage(currentPage, limit, searchValue).then((data) => {
         setProducts(data);
       });
     }
-  }, [currentPage, isLoggedIn, limit, navigate]);
+  }, [currentPage, isLoggedIn, limit, navigate, searchValue]);
 
   const handlePageChange = (newPage: number) => {
     setSearchParams({ page: newPage.toString() });

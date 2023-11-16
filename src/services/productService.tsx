@@ -31,12 +31,22 @@ export const getTotalProducts = async () => {
   }
 }
 
-export const getProductByPage = async (page: number, limit: number) => {
+export const getProductByPage = async (page: number, limit: number, search: string) => {
   console.log('getProductByPage', page, limit);
   try {
-    const response = await API.get(`/products/page/${page}/limit/${limit}`);
+    const response = await API.get(`/products/page/${page}/limit/${limit}/search/${search}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching products by page:', error);
+  }
+}
+
+export const getProductWithSearch = async (search: string) => {
+  console.log('getProductWithSearch', search);
+  try {
+    const response = await API.get(`/products/search/${search}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching products with search:', error);
   }
 }
