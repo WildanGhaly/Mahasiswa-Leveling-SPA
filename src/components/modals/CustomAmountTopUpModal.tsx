@@ -30,7 +30,7 @@ const CustomAmountTopUp: React.FC = () => {
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-    const numericValue = parseFloat(inputValue);
+    const numericValue = parseInt(inputValue);
   
     if (!isNaN(numericValue) && numericValue >= 0 && numericValue <= 1000000) {
       setAmount(numericValue);
