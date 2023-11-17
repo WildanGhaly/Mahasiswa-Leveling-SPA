@@ -29,7 +29,16 @@ const CustomAmountTopUp: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAmount(e.target.value);
+    const inputValue = e.target.value;
+    const numericValue = parseFloat(inputValue);
+  
+    if (!isNaN(numericValue) && numericValue >= 0 && numericValue <= 1000000) {
+      setAmount(numericValue);
+    } else if (numericValue > 1000000) {
+      setAmount(1000000);
+    } else {
+      setAmount("");
+    }
   };
 
   const handleCustomTopUp = () => {
