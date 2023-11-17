@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Container, SimpleGrid } from "@chakra-ui/react";
 import TopUpOption from "../components/cards/TopUpCard";
 import CustomAmountTopUp from "../components/modals/CustomAmountTopUpModal";
+import CustomAmountConvert from "../components/modals/ConvertMoneyModal";
 import ReusableHeader from "../components/layout/ReusableHeader";
 
 const TopUpPage = () => {
@@ -19,6 +20,7 @@ const TopUpPage = () => {
   return (
     <Container maxW="container.lg">
       <ReusableHeader headingName="Top Up" />
+      <CustomAmountConvert />
       <CustomAmountTopUp />
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={7}>
         {/* Render 6 top-up options */}
