@@ -7,7 +7,7 @@ const NotFoundPage = () => {
 
     return (
         <Box textAlign="center" py={10} px={6} bg={bgColor} minHeight="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-            <Image src="/image/1.jpg" alt="404 - Not Found" boxSize="300px" mx="auto" mb={8} />
+            <Image src="/image/error.png" alt="404 - Not Found" boxSize="300px" mx="auto" mb={8} />
             <Heading display="inline-block" as="h1" size="2xl" bgGradient="linear(to-r, teal.400, blue.500)" backgroundClip="text" padding="20px">
                 404 - Page Not Found
             </Heading>
