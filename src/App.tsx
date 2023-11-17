@@ -16,6 +16,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import "./App.css";
 import { ReactNode } from "react";
 import { MoneyProvider } from "./context/MoneyContext";
+import NotFoundPage from "./pages/404page";
 
 interface AppContainerProps {
   children: ReactNode;
@@ -51,6 +52,7 @@ function App() {
                 <Route path="/topup" element={<TopUpPage />} />
                 <Route path="/merchant" element={<MerchantPage />} />
                 <Route path="/settings" element={<SettingsPage />} />
+                <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </div>
           </AppContainer>
