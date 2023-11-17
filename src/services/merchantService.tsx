@@ -16,11 +16,11 @@ export const getTotalMerchants = async (search: string, filter: string) => {
 
   let api = `/merchants/count`;
   if (search) {
-    api += `/search/${search}`;
+    api += `/search/${encodeURIComponent(search)}`;
   }
 
   if (filter) {
-    api += `/filter/${filter}`;
+    api += `/filter/${encodeURIComponent(filter)}`;
   }
 
   console.log('api', api);
@@ -38,10 +38,10 @@ export const getMerchantByPage = async (page: number, limit: number, search: str
   console.log('getMerchantByPage', page, limit, search);
   let api = `/merchants/page/${page}/limit/${limit}`;
   if (search) {
-    api += `/search/${search}`;
+    api += `/search/${encodeURIComponent(search)}`;
   }
   if (filter) {
-    api += `/filter/${filter}`;
+    api += `/filter/${encodeURIComponent(filter)}`;
   }
 
   console.log('api', api);
