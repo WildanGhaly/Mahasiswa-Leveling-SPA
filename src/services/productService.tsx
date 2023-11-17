@@ -13,7 +13,7 @@ export const getProducts = async () => {
 
 export const getProductByID = async (id: string) => {
   try {
-    const response = await API.get(`/products/${id}`);
+    const response = await API.get(`/products/${encodeURIComponent(id)}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching product:', error);
@@ -25,11 +25,11 @@ export const getTotalProducts = async (search: string, filter: string) => {
 
   let api = `/products/count`;
   if (search) {
-    api += `/search/${search}`;
+    api += `/search/${encodeURIComponent(search)}`;
   }
 
   if (filter) {
-    api += `/filter/${filter}`;
+    api += `/filter/${encodeURIComponent(filter)}`;
   }
 
   console.log('api', api);
@@ -47,10 +47,10 @@ export const getProductByPage = async (page: number, limit: number, search: stri
   console.log('getProductByPage', page, limit, search);
   let api = `/products/page/${page}/limit/${limit}`;
   if (search) {
-    api += `/search/${search}`;
+    api += `/search/${encodeURIComponent(search)}`;
   }
   if (filter) {
-    api += `/filter/${filter}`;
+    api += `/filter/${encodeURIComponent(filter)}`;
   }
 
   console.log('api', api);
@@ -65,7 +65,7 @@ export const getProductByPage = async (page: number, limit: number, search: stri
 export const getProductWithSearch = async (search: string) => {
   console.log('getProductWithSearch', search);
   try {
-    const response = await API.get(`/products/search/${search}`);
+    const response = await API.get(`/products/search/${encodeURIComponent(search)}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching products with search:', error);
