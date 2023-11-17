@@ -1,27 +1,65 @@
-# React + TypeScript + Vite
+# Mahasiswa Leveling Client SPA Service
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository is a client service for Mahasiswa Leveling SPA. This service is built using [ReactJS](https://reactjs.org/), [Chakra UI](https://chakra-ui.com/), [Vite](https://vitejs.dev/), and [TypeScript](https://www.typescriptlang.org/).
 
-Currently, two official plugins are available:
+## Setup and Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Prerequisites
+- [NodeJS](https://nodejs.org/en/)
 
-## Expanding the ESLint configuration
+### Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+#### Local
+1. Clone this repository
+2. Install dependencies
+```bash
+npm install
+```
+3. Run the service
+```bash
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+#### Docker
+1. Clone this repository
+2. Build the image
+```bash
+docker-compose build
+```
+3. Run the container
+```bash
+docker-compose up
+```
+
+## Screenshots
+<img src="screenshots/8.png" width="500">
+<img src="screenshots/9.png" width="500">
+<img src="screenshots/10.png" width="500">
+<img src="screenshots/11.png" width="500">
+<img src="screenshots/1.png" width="500">
+<img src="screenshots/2.png" width="500">
+<img src="screenshots/3.png" width="500">
+<img src="screenshots/4.png" width="500">
+<img src="screenshots/5.png" width="500">
+<img src="screenshots/6.png" width="500">
+<img src="screenshots/7.png" width="500">
+
+## Team Responsibilities
+|Featyre|13521015|13521025|
+|-------|--------|--------|
+|Initiate Project Setup|✔️||
+|Login Page|✔️||
+|Register Page|✔️||
+|Home Page|✔️||
+|About Page|✔️||
+|Profile Page|✔️||
+|Dashboard Page|✔️||
+|Merchandise Page|✔️||
+|Product Detail Page|✔️||
+|History Page|✔️||
+|Top Up Page|✔️||
+|Modals|✔️||
+|Search Filter Pagination|✔️||
+|Sidebar|✔️||
+|Navbar|✔️||
+|Testing|✔️|✔️|

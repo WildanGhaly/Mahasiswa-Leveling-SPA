@@ -35,10 +35,10 @@ const SettingsPage: React.FC = () => {
 
   // Remaining data and handlers
   const performanceData = {
-    totalAchievement: 5,
-    totalQuest: 10,
-    level: 3,
-    experience: 200,
+    totalAchievement: "???",
+    totalQuest: "???",
+    level: "???",
+    experience: "???",
   };
 
   const handleToggleEmailNotify = () => {
