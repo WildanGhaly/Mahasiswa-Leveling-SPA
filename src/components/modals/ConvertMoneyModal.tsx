@@ -39,8 +39,8 @@ const CustomAmountConvert: React.FC = () => {
 
   const confirmCustomConvert = async () => {
     try {
-      const response = await API.post(
-        "/convert",
+      const response = await API.patch(
+        "/money",
         { amount },
         { withCredentials: true }
       );
